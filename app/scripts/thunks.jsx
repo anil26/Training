@@ -12,5 +12,4 @@ function createThunkMiddleware(extraArgument) {
 }
 const thunk = createThunkMiddleware();
 
-
 export default thunk;

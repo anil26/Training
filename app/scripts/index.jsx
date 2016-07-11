@@ -27,19 +27,23 @@ class App extends React.Component{
   }
   render(){
     var currentCityWeather=store.getState().currentCityWeather;
-    var temperature,description;
-    if(currentCityWeather.main=== undefined && currentCityWeather.description===undefined){
+    var temperature,description,errormessage;
+
+    if(Object.keys(currentCityWeather).length===0 || currentCityWeather.main=== undefined && currentCityWeather.description===undefined){
       temperature='';
       description='';
-    }else{
+      errormessage=store.getState().statusText;
+    }
+    else{
       temperature=currentCityWeather.main.temp + '°C';
       description=currentCityWeather.weather[0].description;
+      errormessage='';
     }
     return (
       <div>
       <h1 className='centerform'>Weather Reporter</h1>
       <SearchForm store={store} getWeather={this.getWeather.bind(this)}></SearchForm>
-      <h2 className='centerform'>{temperature} {description}</h2>
+      <h2 className='centerform'>{temperature} {description} {errormessage}</h2>
       </div>
       );
   }

@@ -107,7 +107,7 @@ function getData(store,city){
       return store.dispatch(dataFromStore(weatherList[index]));
   var UrlForWeather=UrlForWeatherByName(city);
   var asyncCall=asyncGetData(UrlForWeather);
-  return store.dispatch(asyncCall);
+  return store.dispatch(asyncCall);//this is dispatching a async call that will be resolved to aplain object by thunk
 }
 
 export {
