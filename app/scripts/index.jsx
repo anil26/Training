@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import SearchForm from './searchform';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { compose, createStore } from 'redux';
 import { getData } from './actions'
 import weatherReducer from './reducer';
 

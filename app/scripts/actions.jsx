@@ -2,7 +2,6 @@
 import  fetch from 'isomorphic-fetch';
 import { APPID } from './keys';
 import * as weatherActions from './constants.jsx';
-import ReactDOM from 'react-dom';
 
 const checkHttpStatus = (response) => {
 
