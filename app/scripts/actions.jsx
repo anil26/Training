@@ -63,7 +63,7 @@ const dataFailure=(error)=>{
   }
 }
 
-function searchinArray(array,keyword){
+function searchInArray(array,keyword){
   for(var obj in array){
     if(array[obj].name.toLowerCase()==keyword.toLowerCase()){
     return obj;
@@ -102,7 +102,7 @@ function asyncGetData(url){
 function getData(store,city){
   var weatherList=store.getState().properties.weatherList;
 
-  var index=searchinArray(weatherList,city)
+  var index=searchInArray(weatherList,city)
 
     if(index!==-1)
       return store.dispatch(dataFromStore(weatherList[index]));
