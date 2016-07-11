@@ -5,7 +5,7 @@ import SearchForm from './searchform';
 import { compose, createStore,applyMiddleware } from 'redux';
 import { getData } from './actions'
 import weatherReducer from './reducer';
-import createThunkMiddleWare from './thunks';
+import thunk from './thunks';
 
 window.__INITIALSTATE__={
   properties :{
@@ -14,7 +14,7 @@ window.__INITIALSTATE__={
   currentCityWeather:{},
   statusText : null
 }
-var middleWare=applyMiddleware(createThunkMiddleWare);
+var middleWare=applyMiddleware(thunk);
 var createStoreWithMiddleWare=compose(middleWare,window.devToolsExtension ? window.devToolsExtension() : f => f);
 const store=createStoreWithMiddleWare(createStore)(weatherReducer,window.__INITIALSTATE__);
 

@@ -20,7 +20,7 @@ function weatherReducer(state,action){
     case weatherActions.DATA_FETCH_SUCCESS_FROM_CALL:
     var obj=Object.assign({},state,{});
     if(action.data.weather===undefined){
-        obj.statusText="City not found";
+        obj.statusText=weatherActions.DEFAULT_ERROR_MESSAGE;
         return obj;
     }
     obj.properties.weatherList.push(action.data);
