@@ -2,10 +2,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import SearchForm from './searchform';
-import { compose, createStore } from 'redux';
+import { compose, createStore,applyMiddleware } from 'redux';
 import { getData } from './actions'
 import weatherReducer from './reducer';
-
+import createThunkMiddleWare from './thunks';
 
 window.__INITIALSTATE__={
   properties :{
@@ -14,13 +14,16 @@ window.__INITIALSTATE__={
   currentCityWeather:{},
   statusText : null
 }
-var store=createStore(weatherReducer,window.__INITIALSTATE__,compose(window.devToolsExtension ? window.devToolsExtension() : f => f));
+var middleWare=applyMiddleware(createThunkMiddleWare);
+var createStoreWithMiddleWare=compose(middleWare,window.devToolsExtension ? window.devToolsExtension() : f => f);
+const store=createStoreWithMiddleWare(createStore)(weatherReducer,window.__INITIALSTATE__);
+
 class App extends React.Component{
   constructor(props){
     super(props);
   }
   getWeather(store,city){
-      getData(store,city);
+    getData(store,city);
   }
   render(){
     var currentCityWeather=store.getState().currentCityWeather;

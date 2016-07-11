@@ -3,6 +3,7 @@ import  fetch from 'isomorphic-fetch';
 import { APPID } from './keys';
 import * as weatherActions from './constants.jsx';
 
+
 const checkHttpStatus = (response) => {
 
   if (response.status >= 200 && response.status < 300) {
@@ -101,12 +102,12 @@ function asyncGetData(url){
 
 function getData(store,city){
   var weatherList=store.getState().properties.weatherList;
-
   var index=searchInArray(weatherList,city)
-
-    if(index!==-1)
+  if(index!==-1)
       return store.dispatch(dataFromStore(weatherList[index]));
-  return asyncGetData(UrlForWeatherByName(city))(store.dispatch);
+  var UrlForWeather=UrlForWeatherByName(city);
+  var asyncCall=asyncGetData(UrlForWeather);
+  return store.dispatch(asyncCall);
 }
 
 export {
