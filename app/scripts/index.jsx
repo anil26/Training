@@ -5,7 +5,7 @@ import SearchForm from './searchform';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { getData } from './actions'
 import weatherReducer from './reducer';
-import  fetch from 'isomorphic-fetch';
+
 
 window.__INITIALSTATE__={
   properties :{
@@ -14,14 +14,13 @@ window.__INITIALSTATE__={
   currentCityWeather:{},
   statusText : null
 }
-var store=createStore(weatherReducer,window.__INITIALSTATE__);
+var store=createStore(weatherReducer,window.__INITIALSTATE__,compose(window.devToolsExtension ? window.devToolsExtension() : f => f));
 class App extends React.Component{
   constructor(props){
     super(props);
   }
   getWeather(store,city){
-
-  getData(store,city);
+      getData(store,city);
   }
   render(){
     var currentCityWeather=store.getState().currentCityWeather;
