@@ -1,0 +1,6 @@
+# Files added to the below list won't be available to git.
+#
+
+node_modules/
+npm-debug.log
+dist/
