@@ -13,7 +13,6 @@ const SignUpPage =React.createClass({
     };
   },
   signUp(data){
-    // alert(JSON.stringify(data, null, 4));
     if(this.isPasswordSame(data)){
       this.props.actions.apiaryCallToGetAndVerify(data,apiaryEndPoint);
     }
@@ -35,7 +34,6 @@ const SignUpPage =React.createClass({
     });
   },
   render(){
-    console.log(this.props.isAuthenticated);
     return (
     <div>
       <h1 className='center'>SignUp to Mock Website</h1>

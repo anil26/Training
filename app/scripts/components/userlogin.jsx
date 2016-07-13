@@ -7,14 +7,28 @@ import { bindActionCreators } from 'redux';
 import * as authActionCreators from '../actions';
 import apiaryEndPoint from '../endpoints';
 import MyInput from './input';
-
+import { browserHistory } from 'react-router';
 const UserLogin = React.createClass({
   getInitialState() {
     return { canSubmit: false };
   },
+  componentDidMount(){
+    if (this.shouldNotRender()) {
+      browserHistory.push('/profile');
+    }
+  },
+  shouldNotRender(){
+    return (this.props.isAuthenticated);
+  },
+  componentDidUpdate(){
+    if (this.shouldNotRender()){
+      browserHistory.push('/profile');
+    }
+  },
   submit(data) {
-     alert(JSON.stringify(data, null, 4));
+
     this.props.actions.apiaryCallToGetAndVerify(data,apiaryEndPoint);
+
 
   },
   enableButton() {

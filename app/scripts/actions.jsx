@@ -1,6 +1,6 @@
 'use strict'
 import * as authActionConstants from './constants';
-
+import { routerActions } from 'react-router-redux';
 
 const checkHttpStatus = (response) => {
 
@@ -17,6 +17,7 @@ const checkHttpStatus = (response) => {
 const parseJSON = (response) => {
   return ( response ? response.json() : Promise.resolve({ message: 'Sorry! Something went wrong' }) );
 };
+
 const httpService={
   get: function(url,options,successCallBack,failureCallBack){
     return fetch(url)
@@ -64,8 +65,8 @@ function apiaryCallToGetAndVerify(userObject,url){
     dispatch(loginRequest());
     var successCallBack=(response)=>{
       if(checkAfterResponse(response,userObject)!==0){
-
         dispatch(loginSuccess(userObject));
+        dispatch(routerActions.push('/profile'));
       }
       else{
         dispatch(loginFailure());
