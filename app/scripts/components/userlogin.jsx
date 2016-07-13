@@ -45,6 +45,6 @@ const mapStateToProps=(state)=>({
 
 const mapDispatchToProps=(dispatch)=>({
   actions:bindActionCreators(authActionCreators,dispatch)
-  });
+});
 
 export default connect(mapStateToProps,mapDispatchToProps)(UserLogin);
