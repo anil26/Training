@@ -1,46 +1,29 @@
 'use strict';
-
 import React from 'react';
-import { render } from 'react-dom';
-import App from '/components/app';
-import SignUpPage from '/components/signuppage';
-import Userlogin from '/components/userlogin';
-import Home from '/components/Home';
-import Test from '/components/test';
-import Rebase from 're-base';
+import ReactDOM from 'react-dom';
+import thunk from 'redux-thunk';
+import { routerMiddleware } from 'react-router-redux';
+import authReducer from './reducer';
+import createLogger from 'redux-logger';
+import Root from './components/Root';
+import { applyMiddleware, compose, createStore ,combineReducers } from 'redux';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-/**
- * Core Javascript file for the application which renders root component
- * inside the HTMLElement with 'appContainer' Id.
- */
+window.__INITIALSTATE__={
+  auth : {
+    isAuthenticated : false
+  },
+  currentUser : {}
+}
+
+var middleWare=applyMiddleware(thunk,routerMiddleware(browserHistory));
+var createStoreWithMiddleWare=compose(middleWare,window.devToolsExtension ? window.devToolsExtension() : f => f);
+
+const store=createStoreWithMiddleWare(createStore)(authReducer,window.__INITIALSTATE__);
+// const store=createStore(authReducer,window.__INITIALSTATE__);
+debugger;
+console.log(store);
+console.log(store.liftedStore.getState());
+// store.liftedStore.getState().committedState
+ReactDOM.render(<Root store={store.liftedStore} />,document.querySelector('#appContainer'));
 
 
-// var config = {
-//     apiKey: "AIzaSyCYBxTnmqyk15wnXhdRt1Yl0STZzH_I1ik",
-//     authDomain: "userlogin-77ecd.firebaseapp.com",
-//     databaseURL: "https://userlogin-77ecd.firebaseio.com",
-//     storageBucket: "userlogin-77ecd.appspot.com",
-// };
-
-
-
-// const store = configureStore(window.__INITIAL_STATE__);
-
-// let token = localStorage.getItem('token');
-
-// if (token !== null) {
-//   store.dispatch(authActionCreators.loginUserSuccess(token));
-// }
-render((
-  <Router history={browserHistory}>
-
-  <Route path='/' component={App}>
-  <IndexRoute component={Home}/>
-  <Route path="/signup" component={SignUpPage}/>
-  <Route path="/login" component={Userlogin}/>
-  </Route>
-
-  </Router>
-  ),document.querySelector('#appContainer'));
-
-// render(<Root/>, document.querySelector('#appContainer'));

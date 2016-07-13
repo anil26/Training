@@ -10,5 +10,4 @@ class ProfilePage extends React.Component{
     );
   }
 }
-
 export default ProfilePage;

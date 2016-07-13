@@ -2,15 +2,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Form } from 'formsy-react';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as authActionCreators from '../actions';
+import apiaryEndPoint from '../endpoints';
 import MyInput from './input';
-// var base=Rebase.createClass('https://userlogin-77ecd.firebaseio.com');
+
 const UserLogin = React.createClass({
   getInitialState() {
     return { canSubmit: false };
   },
   submit(data) {
-    alert(JSON.stringify(data, null, 4));
+    // alert(JSON.stringify(data, null, 4));
+    this.props.actions.apiaryCallToGetAndVerify(data,apiaryEndPoint);
+
   },
   enableButton() {
     this.setState({ canSubmit: true });
@@ -19,6 +24,7 @@ const UserLogin = React.createClass({
     this.setState({ canSubmit: false });
   },
   render() {
+    console.log(this.props.isAuthenticated);
     return (
       <div>
       <h1 className='center'>Login to Mock Website</h1>
@@ -32,4 +38,14 @@ const UserLogin = React.createClass({
   }
 });
 
-export default UserLogin;
+
+const mapStateToProps=(state)=>({
+  isAuthenticated : state.auth.isAuthenticated,
+  currentUser : state.currentUser
+});
+
+const mapDispatchToProps=(dispatch)=>({
+  actions:bindActionCreators(authActionCreators,dispatch)
+  });
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserLogin);
