@@ -12,8 +12,13 @@ const SignUpPage =React.createClass({
   },
   signUp(data){
     // alert(JSON.stringify(data, null, 4));
-    this.props.actions.apiaryCallToGetAndVerify(data,apiaryEndPoint);
-    },
+    if(this.isPasswordSame(data)){
+      this.props.actions.apiaryCallToGetAndVerify(data,apiaryEndPoint);
+    }
+    else{
+      alert("Both the passwords doesnot match");
+    }
+  },
   isPasswordSame(data){
     return (data.password===data.repassword);
   },
@@ -53,4 +58,4 @@ const mapDispatchToProps=(dispatch)=>({
   actions:bindActionCreators(authActionCreators,dispatch)
   });
 
-export default connect(mapStateToProps,mapDispatchToProps)(UserLogin);
+export default connect(mapStateToProps,mapDispatchToProps)(SignUpPage);
