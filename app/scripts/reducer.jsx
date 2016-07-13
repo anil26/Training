@@ -4,11 +4,12 @@ import * as authActionCreators from './constants';
 const initialstate={
   isAuthenticated : false,
   isAuthenticating : false,
-  statusText : null
+  statusText : null,
+  currentUser : {}
 };
 
 
-const authReducer=(state,action)=>{
+const authReducer=(state=initialstate,action)=>{
   switch(action.type){
     case authActionCreators.LOGIN_USER_SUCCESS:
     return Object.assign({},state,{

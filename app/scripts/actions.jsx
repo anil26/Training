@@ -52,16 +52,23 @@ const loginFailure=()=>{
 }
 
 function checkAfterResponse(response,userObject){
-  return (response.users.filter(function(value,index,array){
+  var filteredArray =response.users.filter(function(value,index,array){
     return (value.email===userObject.email && value.password===userObject.password);
-  }).length!==0);
-}
+  });
+  return filteredArray.length;
+  }
+// function checkAfterResponse(response,userObject){
+//   return (response.users.filter(function(value,index,array){
+//     return (value.email===userObject.email && value.password===userObject.password);
+//   }).length!==0);
+// }
 
 function apiaryCallToGetAndVerify(userObject,url){
   return function(dispatch){
     dispatch(loginRequest());
     var successCallBack=(response)=>{
-      if(checkAfterResponse(response,userObject)){
+      if(checkAfterResponse(response,userObject)!==0){
+
         dispatch(loginSuccess(userObject));
       }
       else{
@@ -70,7 +77,7 @@ function apiaryCallToGetAndVerify(userObject,url){
     }
     var failureCallBack=(response)=>{
       dispatch(loginFailure());
-    }//dispatching login request
+    }
     var headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -82,8 +89,7 @@ function apiaryCallToGetAndVerify(userObject,url){
         body : data
     }
 
-
-    return httpService.get(url,options,successCallBack,failureCallBack);
+  return httpService.get(url,options,successCallBack,failureCallBack);
   }
 }
 

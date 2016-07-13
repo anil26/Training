@@ -13,7 +13,7 @@ const UserLogin = React.createClass({
     return { canSubmit: false };
   },
   submit(data) {
-    // alert(JSON.stringify(data, null, 4));
+     alert(JSON.stringify(data, null, 4));
     this.props.actions.apiaryCallToGetAndVerify(data,apiaryEndPoint);
 
   },
@@ -24,7 +24,6 @@ const UserLogin = React.createClass({
     this.setState({ canSubmit: false });
   },
   render() {
-    console.log(this.props.isAuthenticated);
     return (
       <div>
       <h1 className='center'>Login to Mock Website</h1>
