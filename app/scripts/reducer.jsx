@@ -29,6 +29,8 @@ const authReducer=(state,action)=>{
       isAuthenticating :true,
       statusText : "Authentication is going on"
     });
+    default :
+    return state;
   }
 };
 

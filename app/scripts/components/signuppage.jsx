@@ -3,6 +3,8 @@ import MyInput from './input';
 import React from 'react';
 import { Form } from 'formsy-react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as authActionCreators from '../actions';
 
 const SignUpPage =React.createClass({
   getInitialState(){

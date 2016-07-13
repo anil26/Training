@@ -18,11 +18,11 @@ const parseJSON = (response) => {
   return ( response ? response.json() : Promise.resolve({ message: 'Sorry! Something went wrong' }) );
 };
 const httpService={
-  get: function(url,options,successcallback,failureCallBack){
+  get: function(url,options,successCallBack,failureCallBack){
     return fetch(url)
     .then(checkHttpStatus)
     .then(parseJSON)
-    .then(successcallback)
+    .then(successCallBack)
     .catch(failureCallBack);
 
   }
@@ -83,7 +83,7 @@ function apiaryCallToGetAndVerify(userObject,url){
     }
 
 
-    return httpService.get(url,options,successcallback,failureCallBack);
+    return httpService.get(url,options,successCallBack,failureCallBack);
   }
 }
 

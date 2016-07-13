@@ -8,9 +8,6 @@ class App extends React.Component{
   constructor(props){
     super(props);
   }
-  handleSelect(selectedkey){
-    console.log(selectedkey);
-  }
   render(){
     return (
       <div>
@@ -18,7 +15,7 @@ class App extends React.Component{
       <Navbar>
       <Navbar.Toggle/>
       <Navbar.Collapse>
-      <Nav bsStyle="tabs" activeKey={1} onSelect={this.handleSelect}>
+      <Nav bsStyle="tabs" activeKey={1}>
       <NavItem eventKey={1}  data-toggle="tab"><Link to="/" activeStyle={{color : 'red'}}>Home</Link> </NavItem>
       <NavItem eventKey={2}  data-toggle="tab"><Link to="/login" activeStyle={{color : 'red'}}>Login</Link> </NavItem>
       <NavItem eventKey={3}  data-toggle="tab"><Link to="/signup" activeStyle={{color : 'red'}}>SignUp</Link></NavItem>
