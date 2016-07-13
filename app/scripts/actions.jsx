@@ -56,12 +56,8 @@ function checkAfterResponse(response,userObject){
     return (value.email===userObject.email && value.password===userObject.password);
   });
   return filteredArray.length;
-  }
-// function checkAfterResponse(response,userObject){
-//   return (response.users.filter(function(value,index,array){
-//     return (value.email===userObject.email && value.password===userObject.password);
-//   }).length!==0);
-// }
+}
+
 
 function apiaryCallToGetAndVerify(userObject,url){
   return function(dispatch){

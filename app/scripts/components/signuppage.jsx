@@ -5,7 +5,7 @@ import { Form } from 'formsy-react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authActionCreators from '../actions';
-
+import apiaryEndPoint from '../endpoints';
 const SignUpPage =React.createClass({
   getInitialState(){
     return {
@@ -35,6 +35,7 @@ const SignUpPage =React.createClass({
     });
   },
   render(){
+    console.log(this.props.isAuthenticated);
     return (
     <div>
       <h1 className='center'>SignUp to Mock Website</h1>
