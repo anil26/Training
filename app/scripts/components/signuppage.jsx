@@ -2,6 +2,7 @@
 import MyInput from './input';
 import React from 'react';
 import { Form } from 'formsy-react';
+import { connect } from 'react-redux';
 
 const SignUpPage =React.createClass({
   getInitialState(){
@@ -10,14 +11,9 @@ const SignUpPage =React.createClass({
     };
   },
   signUp(data){
-    alert(JSON.stringify(data, null, 4));
-    if(this.isPasswordSame(data)){
-      alert("successfull");
-    }
-    else{
-      alert("failed");
-    }
-  },
+    // alert(JSON.stringify(data, null, 4));
+    this.props.actions.apiaryCallToGetAndVerify(data,apiaryEndPoint);
+    },
   isPasswordSame(data){
     return (data.password===data.repassword);
   },
@@ -48,4 +44,13 @@ const SignUpPage =React.createClass({
 
 });
 
-export default SignUpPage;
+const mapStateToProps=(state)=>({
+  isAuthenticated : state.auth.isAuthenticated,
+  currentUser : state.currentUser
+});
+
+const mapDispatchToProps=(dispatch)=>({
+  actions:bindActionCreators(authActionCreators,dispatch)
+  });
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserLogin);
