@@ -24,6 +24,6 @@ debugger;
 console.log(store);
 console.log(store.liftedStore.getState());
 // store.liftedStore.getState().committedState
-ReactDOM.render(<Root store={store.liftedStore} />,document.querySelector('#appContainer'));
+ReactDOM.render(<Root store={store} />,document.querySelector('#appContainer'));
 
 
