@@ -81,10 +81,6 @@ const removeFromCart=(item)=>{
 }
 
 const notifyMe=function(message){
-  // console.log("grtting called");
-  // Notification.requestPermission().then(function(){
-  //   var notification=new Notification(message);
-  // })
   debugger;
   if(!("Notification") in window){
     alert("This browser doesnot support desktop notification");
@@ -108,13 +104,13 @@ function cartReducer(state,action){
       var obj=Object.assign({},state);
       var cartItemList=obj.payload.cartItems;
       console.log(cartItemList);
-      debugger;
-      cartItemList.forEach(function(item,index,cartItemList){
-        if(item.id==action.payload.item.id){
-          item.count++;
-          return obj;
-          }
+      var item=cartItemList.find(function(item,index,cartItemList){
+       return (item.id==action.payload.item.id);
       });
+      if(item!==undefined){
+        item.count++;
+        return obj;
+      }
       var item=action.payload.item;
       item.count=1;
       obj.payload.cartItems.push(item);
