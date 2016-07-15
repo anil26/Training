@@ -172,9 +172,6 @@ class Addp extends React.Component{
 }
 
 class Imagep extends React.Component{
-  constructor(props){
-    super(props);
-  }
   render(){
     return (
       <div>
@@ -194,9 +191,6 @@ class Pricep extends React.Component{
 
 
 class Item extends React.Component{
-  constructor(props){
-    super(props);
-  }
   createHTML(array){
     return array.map(function(current,index,array){
       return (<div key={current.id}><Imagep></Imagep><Pricep price={current.price}></Pricep><Addp item={current}></Addp></div>);
