@@ -119,12 +119,12 @@ function cartReducer(state,action){
         }
 
       });
-      case ADD_NOTIFICATION :
-      var obj=Object.assign({},state);
-      obj.notification.message=action.message;
-      return obj;
-      default:
-      return state;
+    case ADD_NOTIFICATION :
+    var obj=Object.assign({},state);
+    obj.notification.message=action.message;
+    return obj;
+    default:
+    return state;
   }
 }
 
