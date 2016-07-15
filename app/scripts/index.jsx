@@ -121,7 +121,6 @@ function cartReducer(state,action){
       });
       case ADD_NOTIFICATION :
       var obj=Object.assign({},state);
-      console.log(obj);
       obj.notification.message=action.message;
       return obj;
       default:
@@ -135,10 +134,6 @@ class Notification extends React.Component{
     this.state={
       message : null
     }
-  }
-  componentDidMount(){
-
-    this.notification=this.refs.notification;
   }
   componentWillReceiveProps(newProps){
     this.setState({
@@ -156,7 +151,6 @@ class Notification extends React.Component{
     this.setTimerForNotification(this.state.message);
   }
   render(){
-    console.log(this.props.notificationState);
     return (
       <div ref="notification"></div>
     );
