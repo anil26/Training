@@ -61,6 +61,8 @@ const  REMOVE_FROM_CART="REMOVE_FROM_CART"
 
 
 //Action creators
+
+
 const addToCart=(item)=>{
   return {
     type :ADD_TO_CART,
@@ -200,6 +202,7 @@ class CartItem extends React.Component{
   }
   remove(current){
     store.dispatch(removeFromCart(current));
+    notifyMe("Removed  " + current.name +  "  from Cart");
   }
   render(){
     return (
