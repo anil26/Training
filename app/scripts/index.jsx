@@ -128,7 +128,7 @@ function cartReducer(state,action){
       return state;
   }
 }
-
+// {this.setTimerForNotification(this.state.message)}
 class Notification extends React.Component{
   constructor(props){
     super(props);
@@ -147,12 +147,23 @@ class Notification extends React.Component{
     this.setState({
       message : newProps.notificationState.message
     });
+
+  }
+  setTimerForNotification(message){
+    debugger;
+    this.refs.notification.innerHTML=message;
+    setTimeout(function(){
+      this.refs.notification.innerHTML='';
+    },5000);
+  }
+  componentDidUpdate(){
+    this.setTimerForNotification(this.state.message);
   }
   render(){
     console.log(this.props.notificationState);
     return (
       <div ref="notification">
-      {this.state.message}
+
       </div>
     );
   }
