@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, compose, createStore } from 'redux';
 
+
 var mockData=[
   {
     id : '1',
@@ -57,8 +58,8 @@ var mockData=[
 //Action Constants
 
 const ADD_TO_CART="ADD_TO_CART";
-const  REMOVE_FROM_CART="REMOVE_FROM_CART"
-
+const  REMOVE_FROM_CART="REMOVE_FROM_CART";
+const ADD_NOTIFICATION="ADD_NOTIFICATION";
 
 //Action creators
 
@@ -70,7 +71,6 @@ const addToCart=(item)=>{
       item :item
     }
   }
-
 }
 const removeFromCart=(item)=>{
   return {
@@ -79,33 +79,20 @@ const removeFromCart=(item)=>{
       item :item
     }
   }
-
 }
 
-const notifyMe=function(message){
-  debugger;
-  if(!("Notification") in window){
-    alert("This browser doesnot support desktop notification");
-  }
-  else if(Notification.permission==='granted'){
-    var notification=new Notification(message);
-  }
-  else if(Notification.permission!=='denied'){
-    Notification.requestPermission(function(permission){
-      if(permission==='granted'){
-        var notification=new Notification(message);
-      }
-    });
+const addNotification=(message)=>{
+  return {
+    type : ADD_NOTIFICATION,
+    message : message
   }
 }
-
 
 function cartReducer(state,action){
   switch(action.type){
     case ADD_TO_CART:
       var obj=Object.assign({},state);
       var cartItemList=obj.payload.cartItems;
-      console.log(cartItemList);
       var item=cartItemList.find(function(item,index,cartItemList){
        return (item.id==action.payload.item.id);
       });
@@ -132,15 +119,50 @@ function cartReducer(state,action){
         }
 
       });
-    default:
-    return state;
+      case ADD_NOTIFICATION :
+      var obj=Object.assign({},state);
+      console.log(obj);
+      obj.notification.message=action.message;
+      return obj;
+      default:
+      return state;
+  }
+}
+
+class Notification extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={
+      message : null
+    }
+  }
+  componentDidMount(){
+    debugger;
+    this.notification=this.refs.notification;
+  }
+  componentWillReceiveProps(newProps){
+
+    // store.dispatch(addNotification(message));
+    debugger;
+    this.setState({
+      message : newProps.notificationState.message
+    });
+  }
+  render(){
+    console.log(this.props.notificationState);
+    return (
+      <div ref="notification">
+      {this.state.message}
+      </div>
+    );
   }
 }
 class Addp extends React.Component{
   add(item){
     debugger;
+    store
     store.dispatch(addToCart(item));
-    notifyMe("Added  " + item.name + "  to Cart" );
+    store.dispatch(addNotification("Adding  " +  item.name + "  to Cart"));
   }
 
   render(){
@@ -202,7 +224,7 @@ class CartItem extends React.Component{
   }
   remove(current){
     store.dispatch(removeFromCart(current));
-    notifyMe("Removed  " + current.name +  "  from Cart");
+    store.dispatch(addNotification("Removing  " + current.name + "  from Cart"));
   }
   render(){
     return (
@@ -256,16 +278,35 @@ class App extends React.Component{
 window.__INITIALSTATE__={
   payload:{
     cartItems : []
+  },
+  notification:{
+    message :null
   }
 };
 
-var store=createStore(cartReducer,window.__INITIALSTATE__);
+class Root extends React.Component{
 
+  render(){
+    var notificationState=store.getState().notification;
+    return(
+      <div>
+      <App/>
+      <Notification notificationState={notificationState}/>
+      </div>
+    );
+  }
+}
+var store=createStore(cartReducer,window.__INITIALSTATE__);
+debugger;
 function render(){
-  ReactDOM.render(<App />,document.getElementById('app'));
+  ReactDOM.render(<Root />,document.getElementById('app'));
 }
 render()
 store.subscribe(render);
+export {
+  store,
+  ADD_NOTIFICATION
+}
 
 
 
