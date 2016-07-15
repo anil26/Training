@@ -128,7 +128,7 @@ function cartReducer(state,action){
       return state;
   }
 }
-// {this.setTimerForNotification(this.state.message)}
+
 class Notification extends React.Component{
   constructor(props){
     super(props);
@@ -137,24 +137,20 @@ class Notification extends React.Component{
     }
   }
   componentDidMount(){
-    debugger;
+
     this.notification=this.refs.notification;
   }
   componentWillReceiveProps(newProps){
-
-    // store.dispatch(addNotification(message));
-    debugger;
     this.setState({
       message : newProps.notificationState.message
     });
-
   }
   setTimerForNotification(message){
-    debugger;
     this.refs.notification.innerHTML=message;
+    var that=this;
     setTimeout(function(){
-      this.refs.notification.innerHTML='';
-    },5000);
+      that.refs.notification.innerHTML='';
+    },2000);
   }
   componentDidUpdate(){
     this.setTimerForNotification(this.state.message);
@@ -162,20 +158,15 @@ class Notification extends React.Component{
   render(){
     console.log(this.props.notificationState);
     return (
-      <div ref="notification">
-
-      </div>
+      <div ref="notification"></div>
     );
   }
 }
 class Addp extends React.Component{
   add(item){
-    debugger;
-    store
     store.dispatch(addToCart(item));
     store.dispatch(addNotification("Adding  " +  item.name + "  to Cart"));
   }
-
   render(){
     var item=this.props.item;
     return (
@@ -308,7 +299,7 @@ class Root extends React.Component{
   }
 }
 var store=createStore(cartReducer,window.__INITIALSTATE__);
-debugger;
+
 function render(){
   ReactDOM.render(<Root />,document.getElementById('app'));
 }
