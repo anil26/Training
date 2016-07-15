@@ -1,8 +1,7 @@
 'use strict'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyMiddleware, compose, createStore } from 'redux';
-
+import { createStore } from 'redux';
 
 var mockData=[
   {
@@ -88,6 +87,7 @@ const addNotification=(message)=>{
   }
 }
 
+//Reducer Function
 function cartReducer(state,action){
   switch(action.type){
     case ADD_TO_CART:
@@ -127,7 +127,7 @@ function cartReducer(state,action){
     return state;
   }
 }
-
+//Notifation React Element
 class Notification extends React.Component{
   constructor(props){
     super(props);
@@ -156,6 +156,7 @@ class Notification extends React.Component{
     );
   }
 }
+//Add button component
 class Addp extends React.Component{
   add(item){
     store.dispatch(addToCart(item));
