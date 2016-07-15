@@ -293,10 +293,7 @@ function render(){
 }
 render()
 store.subscribe(render);
-export {
-  store,
-  ADD_NOTIFICATION
-}
+
 
 
 
