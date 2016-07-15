@@ -5,28 +5,47 @@ import * as CalenderActions from './actions';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { numberToMonthMapping } from './helper';
+NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+HTMLCollection.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
 class Calender extends React.Component{
-
-  shouldComponentUpdate(nextProps, nextState){
-    return true;
+  constructor(props){
+    super(props);
+    this.state={
+    date : this.props.date
+   };
   }
-  highlightDate(){
+  highLightDate(){
     var dateToBehighLighted=ReactDOM.findDOMNode(this.refs.table);
-    var t=document.getElementById(this.props.calenderState.calenderState.datePicked);
+    var t=document.getElementById(this.props.date.day);
     t.className="selected";
   }
-  componentDidMount(){
-    this.highlightDate();
+  backGround(){
+    var dataToBeBackGround=ReactDOM.findDOMNode(this.refs.table);
+    var t=dataToBeBackGround.getElementsByClassName("selected");
+    var m=Array.prototype.slice.call(t);
+    m.forEach(function(element,index,array){
+      element.className="noclass"
+    })
   }
-  componentWillReceiveProps(){
-    this.highlightDate();
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      date : this.props.date
+    });
+  }
+  componentDidUpdate(prevProps,prevState){//Now I have the access to DOM
+    this.backGround();
+    this.highLightDate();
+
+  }
+
+  componentDidMount(prevProps,prevState){
+    this.highLightDate();
   }
   render(){
-    console.log(numberToMonthMapping[this.props.calenderState.calenderState.monthPicked]);
     return (
       <div className='calender'>
         <header>
-          <h2>{numberToMonthMapping[this.props.calenderState.calenderState.monthPicked+1]} {this.props.calenderState.calenderState.yearPicked}</h2>
+          <h2>{numberToMonthMapping[this.props.date.month]} {this.props.date.year}</h2>
         </header>
         <table>
           <tbody ref="table">

@@ -1,6 +1,4 @@
 'use strict'
-
-
 var numberToMonthMapping={
   1 : "January",
   2 : "February",
