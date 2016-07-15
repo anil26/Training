@@ -1,9 +1,7 @@
-
 'use strict'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, compose, createStore } from 'redux';
-
 
 var mockData=[
   {
@@ -44,7 +42,7 @@ var mockData=[
   },
   {
     id : '7',
-    name : 'Graphes',
+    name : 'Grapes',
     price : '$2.5',
     availability: false
   },
@@ -55,6 +53,9 @@ var mockData=[
     availability: true
   }
 ];
+
+//Action Constants
+
 const ADD_TO_CART="ADD_TO_CART";
 const  REMOVE_FROM_CART="REMOVE_FROM_CART"
 
@@ -79,57 +80,69 @@ const removeFromCart=(item)=>{
 
 }
 
-
+const notifyMe=function(message){
+  // console.log("grtting called");
+  // Notification.requestPermission().then(function(){
+  //   var notification=new Notification(message);
+  // })
+  debugger;
+  if(!("Notification") in window){
+    alert("This browser doesnot support desktop notification");
+  }
+  else if(Notification.permission==='granted'){
+    var notification=new Notification(message);
+  }
+  else if(Notification.permission!=='denied'){
+    Notification.requestPermission(function(permission){
+      if(permission==='granted'){
+        var notification=new Notification(message);
+      }
+    });
+  }
+}
 
 
 function cartReducer(state,action){
   switch(action.type){
     case ADD_TO_CART:
-    var obj=Object.assign({},state);
-    var array=obj.payload.cartItems;
-
-    for(var item in array){
-      if(array[item].id==action.payload.item.id){
-        array[item].count++;
-        return obj;
-      }
-    }
-    var t=action.payload.item;
-    t.count=1;
-
-    obj.payload.cartItems.push(t);
-
-    return obj;
+      var obj=Object.assign({},state);
+      var cartItemList=obj.payload.cartItems;
+      console.log(cartItemList);
+      debugger;
+      cartItemList.forEach(function(item,index,cartItemList){
+        if(item.id==action.payload.item.id){
+          item.count++;
+          return obj;
+          }
+      });
+      var item=action.payload.item;
+      item.count=1;
+      obj.payload.cartItems.push(item);
+      return obj;
 
     case REMOVE_FROM_CART:
-    var obj=Object.assign({},state,{});
-    var array=obj.payload.cartItems;
-    for(var item in array){
-      if(action.payload.item.id==array[item].id && array[item].count!==1){
-        array[item].count--;
-        return Object.assign({},state,obj);
-      }
-      else if(action.payload.item.id==array[item].id && array[item].count==1){
-        array.splice(item,1);
-        return Object.assign({},state,obj);
-      }
+      var obj=Object.assign({},state,{});
+      var cartItemList=obj.payload.cartItems;
+      cartItemList.forEach(function(item,index,cartItemList){
+        if(action.payload.item.id==item.id && item.count!==1){
+          item.count--;
+          return obj;
+        }
+        else if(action.payload.item.id==item.id && item.count==1){
+          cartItemList.splice(index,1);
+          return obj;
+        }
 
-    }
-
+      });
     default:
     return state;
-
-
   }
 }
-
-
 class Addp extends React.Component{
-  constructor(props){
-    super(props);
-  }
   add(item){
+    debugger;
     store.dispatch(addToCart(item));
+    notifyMe("Added  " + item.name + "  to Cart" );
   }
 
   render(){
@@ -138,7 +151,7 @@ class Addp extends React.Component{
       <div>
         <button onClick={this.add.bind(this,item)}>Add</button>
       </div>
-      );
+    );
   }
 }
 
@@ -151,19 +164,15 @@ class Imagep extends React.Component{
       <div>
       <img src="#"></img>
       </div>
-      );
+    );
   }
 }
 
 class Pricep extends React.Component{
-  constructor(props){
-    super(props);
-  }
   render(){
-
     return (
       <div>{this.props.price}</div>
-      );
+    );
   }
 }
 
@@ -177,112 +186,86 @@ class Item extends React.Component{
       return (<div key={current.id}><Imagep></Imagep><Pricep price={current.price}></Pricep><Addp item={current}></Addp></div>);
     });
   }
-
   render(){
-
     return (
       <div>
       {this.createHTML(this.props.data)}
       </div>
-      );
+    );
   }
 }
 
 class CartItem extends React.Component{
-  constructor(props){
-    super(props);
-  }
   convertToInt(value){
-    var t=value.split("");
-    t.shift();
-    var s=t.join("");
-    return parseFloat(s);
+  var t=value.split("");
+  t.shift();
+  var s=t.join("");
+  return parseFloat(s);
   }
   remove(current){
     store.dispatch(removeFromCart(current));
   }
-
   render(){
-
     return (
       <div>
-        <div>{this.props.item.name}</div>
+      <div>{this.props.item.name}</div>
       <div>{this.props.item.count}</div>
       <div>{this.props.item.price}</div>
-      <div>Quantity:{parseInt(this.props.item.count)*this.convertToInt(this.props.item.price)}</div>
+      <div>Price :{parseInt(this.props.item.count)*this.convertToInt(this.props.item.price)}</div>
       <button onClick={this.remove.bind(this,this.props.item)}>Remove</button>
       </div>
-
-      );
+    );
   }
 }
 
 class Quantity extends React.Component{
-  constructor(props){
-    super(props);
-  }
   render(){
     return (
       <div>{this.props.count}</div>
-      );
+    );
   }
 }
 class Cart extends React.Component{
-  constructor(props){
-    super(props);
-  }
-
-  createcartItems(){
+  createCartItems(){
     var item=store.getState().payload.cartItems;
-
     return item.map(function(current,index,array){
-      return (<CartItem item={current}></CartItem>);
+      return (<CartItem  id={item.name} item={current}></CartItem>);
     });
   }
   render(){
-
     return (
       <div>
-      {this.createcartItems()}
+      {this.createCartItems()}
       </div>
-      );
+    );
   }
 }
 
 class App extends React.Component{
-
-  constructor(props){
-    super(props);
-  }
   render(){
-
-     return (
+    return (
       <div>
         <h1 className='text-primary'>Online Shopping </h1>
         <h2>Items</h2>
         <Item data={mockData}></Item>
-        <Cart data={mockData}></Cart>
+        <Cart/>
       </div>
-
     );
   }
 }
 
 window.__INITIALSTATE__={
-payload:{
-  cartItems : []
-}
-
+  payload:{
+    cartItems : []
+  }
 };
-
 
 var store=createStore(cartReducer,window.__INITIALSTATE__);
 
 function render(){
-ReactDOM.render(<App />,document.getElementById('app'));
+  ReactDOM.render(<App />,document.getElementById('app'));
 }
 render()
-
 store.subscribe(render);
 
 
