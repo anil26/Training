@@ -219,7 +219,7 @@ class CartItem extends React.Component{
   }
   render(){
     return (
-      <div>
+      <div id={this.props.item.id}>
       <div>{this.props.item.name}</div>
       <div>{this.props.item.count}</div>
       <div>{this.props.item.price}</div>
@@ -241,7 +241,7 @@ class Cart extends React.Component{
   createCartItems(){
     var item=store.getState().payload.cartItems;
     return item.map(function(current,index,array){
-      return (<CartItem  key={item.id} item={current}></CartItem>);
+      return (<CartItem  key={current.id} item={current}></CartItem>);
     });
   }
   render(){
