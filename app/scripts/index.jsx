@@ -152,7 +152,7 @@ class Notification extends React.Component{
   }
   render(){
     return (
-      <div ref="notification"></div>
+      <div ref="notification" className="notification"></div>
     );
   }
 }
@@ -241,7 +241,7 @@ class Cart extends React.Component{
   createCartItems(){
     var item=store.getState().payload.cartItems;
     return item.map(function(current,index,array){
-      return (<CartItem  id={item.name} item={current}></CartItem>);
+      return (<CartItem  key={item.id} item={current}></CartItem>);
     });
   }
   render(){
