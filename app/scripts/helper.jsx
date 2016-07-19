@@ -1,7 +1,4 @@
 'use strict'
-import fetch from 'isomorphic-fetch';
-
-
 function getFormattedDate(date){
   if(! date){
     date=new Date();
