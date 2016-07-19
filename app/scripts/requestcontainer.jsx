@@ -9,7 +9,7 @@ import * as postManActionCreators from './actions';
 class RequestContainer extends React.Component{
   render(){
     return (
-      <RequestPresentational currentRequest={this.props.currentRequest } request={this.props.actions.makeRequest.bind(this)}/>
+      <RequestPresentational currentRequest={this.props.currentRequest } statusText={this.props.statusText} request={this.props.actions.makeRequest.bind(this)}/>
     );
   }
 }

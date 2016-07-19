@@ -33,7 +33,7 @@ const reducer=(state=initialState,action)=>{
 
     case httpMethodCreator.REQUEST_FAILURE :
       var object=Object.assign({},state);
-      object.currentRequest.data=action.payload.statusText;
+      object.statusText=action.payload.statusText;
       return object;
     default :
       return state;

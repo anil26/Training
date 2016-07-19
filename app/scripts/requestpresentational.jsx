@@ -2,6 +2,8 @@
 import React from 'react';
 import { DropdownButton,Dropdown,MenuItem,FormControl,ControlLabel,FormGroup,Button } from 'react-bootstrap';
 import ReactDOM from 'react-dom';
+import Response from './response';
+import Select from 'react-select';
 
 class RequestPresentational extends React.Component{
   onSelect(eventKey,event){
@@ -19,6 +21,17 @@ class RequestPresentational extends React.Component{
     inputElement.value=""
     this.refs.selected.innerHTML="";
   }
+  getOptions(){
+    var options=[
+      { value : "GET",label : "GET"},
+      { value : "POST",label : "POST"},
+      { value : "PUT",label : "PUT"},
+      { value : "DELETE",label : "DELETE"},
+      { value : "PATCH",label : "PATCH"},
+      { value : "HEAD",label : "HEAD"}
+    ];
+    return options;
+  }
   render(){
     return (
       <div className='row'>
@@ -27,7 +40,7 @@ class RequestPresentational extends React.Component{
             <div className='col-md-10'>
                 <div className='row'>
                   <div className='col-md-2'>
-                  <DropdownButton  ref="dropdown" onSelect={this.onSelect.bind(this)} bsStyle="default" id="mydropdown" title="Method">
+                    <DropdownButton  ref="dropdown" onSelect={this.onSelect.bind(this)} bsStyle="default" id="mydropdown" title="Method">
                     <MenuItem eventKey="1" >GET</MenuItem>
                     <MenuItem eventKey="2">PUT</MenuItem>
                     <MenuItem eventKey="3">POST</MenuItem>
@@ -48,23 +61,27 @@ class RequestPresentational extends React.Component{
                 </div>
             </div>
             <div className='col-md-2'>
-              <Button bsStyle='primary' onClick={this.send.bind(this)}> SEND</Button>
+              <Button bsStyle='primary' onClick={this.reset.bind(this)}> RESET</Button>
             </div>
           </div>
           <div className='row'>
             <div>
-              <Button className='offset' bsStyle="primary" onClick={this.reset.bind(this)} >RESET</Button>
+              <Button className='offset' bsStyle="primary" onClick={this.send.bind(this)} >SEND</Button>
             </div>
           </div>
         </div>
-        <div className='row'>
-          <div className='col-md-12  responsebox'>
-            <h3 className="offset"><strong>Response</strong></h3>
-            {this.props.currentRequest?this.props.currentRequest.data : this.props.currentRequest.statusText}
-          </div>
-        </div>
+        <Response currentRequest={this.props.currentRequest} statusText={this.props.statusText}/>
       </div>
     );
   }
 }
 export default RequestPresentational;
+
+/*<DropdownButton  ref="dropdown" onSelect={this.onSelect.bind(this)} bsStyle="default" id="mydropdown" title="Method">
+  <MenuItem eventKey="1" >GET</MenuItem>
+  <MenuItem eventKey="2">PUT</MenuItem>
+  <MenuItem eventKey="3">POST</MenuItem>
+  <MenuItem eventKey="4">DELETE</MenuItem>
+  <MenuItem eventKey="5">HEAD</MenuItem>
+  <MenuItem eventKey="6">PATCH</MenuItem>
+</DropdownButton>*/

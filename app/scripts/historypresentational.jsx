@@ -7,7 +7,10 @@ class HistoryPresentational extends React.Component{
   createRequestHtml(list){
     var that=this;
     return list.map(function(current,index,array){
-      var date=getFormattedDate(current.date);
+      if(typeof(current.date)=="string")
+        var date=getFormattedDate(new Date(current.date));
+      else
+        var date=getFormattedDate(current.date);
       return (<Request  date={date} request={that.props.request} url={current.url} method={current.method}></Request>)
     });
   }
