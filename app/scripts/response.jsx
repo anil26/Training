@@ -7,7 +7,7 @@ class Response extends React.Component{
     return (
       <div className='row'>
           <div className='col-md-12  responsebox'>
-            <h3 className="offset"><strong>Response</strong></h3>
+            <h2 className="offset"><strong>Response Body</strong></h2>
             {this.props.currentRequest?this.props.currentRequest.data : this.props.statusText}
           </div>
         </div>

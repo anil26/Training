@@ -146,6 +146,10 @@
   position : relative;
   margin-left : 20px;
 }
+.send{
+  position : relative;
+  margin-left : 150px;
+}
 /**
  * React Select
  * ============
@@ -516,4 +520,8 @@
   to {
     -webkit-transform: rotate(1turn);
   }
+}
+
+.cancel{
+  float : right;
 }

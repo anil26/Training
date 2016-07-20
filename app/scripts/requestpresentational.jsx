@@ -52,11 +52,12 @@ class RequestPresentational extends React.Component{
                   <div className='col-md-7'>
                     <form>
                       <FormGroup  controlId="formControlsText">
-                        <FormControl  ref='input' type="text" placeholder="Enter URL" />
+                        <FormControl  ref='input' type="text" placeholder="Enter URL"  defaultValue={this.props.currentRequest.url} />
                       </FormGroup>
                     </form>
                   </div>
                   <div className='col-md-1' ref="selected">
+                  {this.props.currentRequest.method || ""}
                   </div>
                 </div>
             </div>
@@ -66,7 +67,7 @@ class RequestPresentational extends React.Component{
           </div>
           <div className='row'>
             <div>
-              <Button className='offset' bsStyle="primary" onClick={this.send.bind(this)} >SEND</Button>
+              <Button className='send' bsStyle="primary" onClick={this.send.bind(this)} >SEND</Button>
             </div>
           </div>
         </div>
@@ -76,12 +77,3 @@ class RequestPresentational extends React.Component{
   }
 }
 export default RequestPresentational;
-
-/*<DropdownButton  ref="dropdown" onSelect={this.onSelect.bind(this)} bsStyle="default" id="mydropdown" title="Method">
-  <MenuItem eventKey="1" >GET</MenuItem>
-  <MenuItem eventKey="2">PUT</MenuItem>
-  <MenuItem eventKey="3">POST</MenuItem>
-  <MenuItem eventKey="4">DELETE</MenuItem>
-  <MenuItem eventKey="5">HEAD</MenuItem>
-  <MenuItem eventKey="6">PATCH</MenuItem>
-</DropdownButton>*/
