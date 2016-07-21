@@ -2,38 +2,48 @@
 import React from 'react';
 import App from './App';
 import InputBox from './inputbox';
-import { Pagination } from 'react-bootstrap';
+import { Pager, Pagination, PageItem} from 'react-bootstrap';
 
-class PaginationAdvanced extends React.Component{
+class Page extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      activePage :1
+      currentPage : 1
     }
   }
-  handleSelect(eventKey) {
-    this.setState({
-      activePage: eventKey
-    });
-    this.props.getUsersOnPage(this.props.currentSearch,eventKey);
+  backClickHandler(){
+    if(this.state.currentPage>1)
+    {
+      this.setState({
+        currentPage : this.state.currentPage-1
+      },function(){
+        this.props.getUsersOnPage(this.props.currentSearch,this.state.currentPage);
+      });
+      // this.props.getUsersOnPage(this.props.currentSearch,this.state.currentPage);
+    }
   }
-  render() {
+  forwardClickHandler(){
+
+    this.setState({
+        currentPage : this.state.currentPage+1
+      },function(){
+          this.props.getUsersOnPage(this.props.currentSearch,this.state.currentPage);
+    });
+
+
+  }
+  render(){
     if(this.props.isFetched==false)
       return (
         <div></div>
-      );
+    );
     return (
-      <Pagination
-        prev
-        first
-        last
-        ellipsis
-        boundaryLinks
-        items={100}
-        maxButtons={5}
-        activePage={this.state.activePage}
-        onSelect={this.handleSelect.bind(this)} />
+      <Pager>
+        <PageItem onClick={this.backClickHandler.bind(this)}>&lt;</PageItem>
+          {this.state.currentPage}
+        <PageItem onClick={this.forwardClickHandler.bind(this)}>&gt;</PageItem>
+      </Pager>
     );
   }
 }
-export default PaginationAdvanced;
+export default Page;

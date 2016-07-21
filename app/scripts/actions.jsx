@@ -41,6 +41,7 @@ const  getUserRequest=(name,page=1)=>{
       dispatch(fetchFailure(searchActionConstants.NO_USER_ON_THIS_PAGE));
     };
     var url=endPoint+name+"&page="+page;
+
     return helpers.get(url,"GET",successCallBack,errorCallback);
   };
 }

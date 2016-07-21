@@ -69,7 +69,7 @@ class InputBox extends React.Component{
       <div>
         <input className='input' ref="inputbox" type="text"  name="search" placeholder="enter user name" onChange={this.onChange.bind(this)}/>
         <div ref="suggestionbox">
-          {this.state.htmlForSuggestion}
+        {this.props.isFetching || !(this.props.isFetched) ? '' : this.state.htmlForSuggestion}
         </div>
       </div>
     );

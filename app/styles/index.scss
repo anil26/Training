@@ -189,3 +189,31 @@ tr:first-child td {
   height : 30px;
   width : 250px;
 }
+
+span.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+}
+
+span.pagination button {display: inline;}
+
+span.pagination button a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+span.pagination button a.active {
+    background-color: #eee;
+    color: black;
+    border: 1px solid #ddd;
+}
+
+span.pagination button a:hover:not(.active) {
+  background-color: #ddd;
+}

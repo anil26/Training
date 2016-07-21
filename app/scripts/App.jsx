@@ -13,7 +13,7 @@ class App extends React.Component{
         <div>
           <div className='row'>
             <div className='col-xs-12 col-md-12 col-lg-12 '>
-            <InputBox pastSearch={this.props.pastSearch} getUsers={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
+            <InputBox isFetching={this.props.result.isFetching} isFetched={this.props.result.isFetched} pastSearch={this.props.pastSearch} getUsers={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
             </div>
           </div>
           <Spinner isFetching={this.props.result.isFetching} isFetched={this.props.result.isFetched}/>
