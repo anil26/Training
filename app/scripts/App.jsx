@@ -12,9 +12,9 @@ class App extends React.Component{
     return (
         <div>
           <div className='row'>
-          <div className='col-xs-12 col-md-12 col-lg-12 '>
-          <InputBox pastSearch={this.props.pastSearch} getUsers={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
-          </div>
+            <div className='col-xs-12 col-md-12 col-lg-12 '>
+            <InputBox pastSearch={this.props.pastSearch} getUsers={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
+            </div>
           </div>
           <Spinner isFetching={this.props.result.isFetching} isFetched={this.props.result.isFetched}/>
           <Result data={this.props.result.currentResult.items?this.props.result.currentResult.items : []}/>
