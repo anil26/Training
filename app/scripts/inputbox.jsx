@@ -20,8 +20,10 @@ class InputBox extends React.Component{
     });
     return filteredSuggestion;
   }
-  onClickSuggestion(current){
-    console.log("clicked");
+  onClickSuggestion(event){
+    var inputBoxElement=ReactDOM.findDOMNode(this.refs.inputbox);
+    var newText=event.target.innerHTML;
+    inputBoxElement.value=newText;
   }
   callBack(value){
 
@@ -39,7 +41,7 @@ class InputBox extends React.Component{
     return suggestion.map(function(current,index,array){
       return (
         <div>
-          <ul onClick={that.onClickSuggestion}>
+          <ul onClick={that.onClickSuggestion.bind(that)}>
             {current}
           </ul>
         </div>
