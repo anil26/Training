@@ -2,7 +2,7 @@
 import React from 'react';
 import Spinner from './spinner';
 import InputBox from './inputbox';
-import Paginat from './pagination';
+import Page from './pagination';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as searchActionCreators from './actions';
@@ -17,8 +17,8 @@ class App extends React.Component{
             </div>
           </div>
           <Spinner isFetching={this.props.result.isFetching} isFetched={this.props.result.isFetched}/>
-          <Result data={this.props.result.currentResult.items?this.props.result.currentResult.items : []}/>
-          <Paginat getUsersOnPage={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
+          <Result statusText={this.props.statusText} data={this.props.result.currentResult.items?this.props.result.currentResult.items : []}/>
+          <Page isFetched={this.props.result.isFetched} getUsersOnPage={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
         </div>
     );
   }
@@ -27,7 +27,8 @@ class App extends React.Component{
 const mapStateToProps = (state) => ({
   result : state.currentResultSet,
   pastSearch : state.pastSearch,
-  currentSearch : state.currentSearch
+  currentSearch : state.currentSearch,
+  statusText : state.statusText
 });
 
 const mapDispatchToProps = (dispatch) => ({

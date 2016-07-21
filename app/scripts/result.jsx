@@ -1,5 +1,6 @@
 'use strict'
 import React from 'react';
+import { NO_USER_ON_THIS_PAGE } from './constants';
 
 class Result extends React.Component{
   createHTMLForResult(list){
@@ -7,15 +8,30 @@ class Result extends React.Component{
       return (
         <div>
           <ul>
-          <li><img src={current.avatar_url} alt="User Avatar" height="70" width="70"/></li>
-          UserName:<li>{current.login}</li>
-          URL:<li><a target="_blank" href={current.html_url}>Link</a></li>
+            <li>
+              <img src={current.avatar_url} alt="User Avatar" height="70" width="70"/>
+            </li>
+          UserName:<li>
+                    {current.login}
+                   </li>
+          URL:<li>
+                <a target="_blank" href={current.html_url}>
+                  Link
+                </a>
+              </li>
           </ul>
         </div>
       );
     });
   }
   render(){
+    if(this.props.statusText=='NO_USER_ON_THIS_PAGE'){
+      return (
+        <div>
+          <h2>{NO_USER_ON_THIS_PAGE}</h2>
+        </div>
+      );
+    }
     return (
       <div>
         <h1>Searched Result</h1>

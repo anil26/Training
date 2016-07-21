@@ -10,6 +10,7 @@ const fetchRequest=(name)=>{
     payload :{
       name : name
     }
+
   }
 }
 
@@ -18,7 +19,8 @@ const fetchSuccess=(data)=>{
     type : searchActionConstants.FETCH_RESPONSE_SUCCESS,
     payload : {
       data : data,
-    }
+    },
+    statusText : ''
   };
 };
 const fetchFailure=(error)=>{
@@ -36,9 +38,7 @@ const  getUserRequest=(name,page=1)=>{
       dispatch(fetchSuccess(response));
     }
     var errorCallback = (error) => {
-      helpers.parseJSON(error.response).then((resp) => {
-        dispatch(fetchFailure({ statusText: resp.message }));
-      });
+      dispatch(fetchFailure(searchActionConstants.NO_USER_ON_THIS_PAGE));
     };
     var url=endPoint+name+"&page="+page;
     return helpers.get(url,"GET",successCallBack,errorCallback);

@@ -14,6 +14,7 @@ const searchReducer=(state=initialState,action)=>{
     case searchActionConstants.FETCH_REQUEST :
       var object=Object.assign({},state);
       object.currentSearch=action.payload.name;
+      object.pastSearch.push(action.payload.name);
       object.currentResultSet={
         currentResult : [],
         isFetched : false,
@@ -27,11 +28,13 @@ const searchReducer=(state=initialState,action)=>{
         isFetched : true,
         isFetching : false
       }
+      object.statusText='';
       return object;
     case searchActionConstants.FETCH_RESPONSE_FAILURE :
       var object=Object.assign({},state);
       object.currentResultSet.isFetching=false;
       object.currentResultSet.isFetched=false;
+      object.statusText=action.error;
       return object;
     default :
       return state;

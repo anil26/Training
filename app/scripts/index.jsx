@@ -18,7 +18,6 @@ const requestPastSearchFromLocalStorage=()=>{
 
 }
 
-
 window.__INITIAL_STATE__ = {
   currentResultSet : {
     currentResult : [],
@@ -26,7 +25,8 @@ window.__INITIAL_STATE__ = {
     isFetched : false
   },
   pastSearch:requestPastSearchFromLocalStorage(),
-  currentSearch:""
+  currentSearch:"",
+  statusText : ""
 };
 
 const middlewares = [thunk,localStorageMiddleware];

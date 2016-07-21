@@ -24,9 +24,12 @@ class InputBox extends React.Component{
     var inputBoxElement=ReactDOM.findDOMNode(this.refs.inputbox);
     var newText=event.target.innerHTML;
     inputBoxElement.value=newText;
+    this.setState({
+      htmlForSuggestion : null
+    });
+    this.props.getUsers(newText);
   }
   callBack(value){
-
     var that=this;
     var timerid=setTimeout(function(){
       that.props.getUsers(value);
@@ -58,11 +61,8 @@ class InputBox extends React.Component{
     })
     if(this.state.timerid!==null){
       clearTimeout(this.state.timerid);
-      this.callBack(value);
     }
-    else{
-      this.callBack(value);
-    }
+    this.callBack(value);
   }
   render(){
     return (
