@@ -8,8 +8,6 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import localStorageMiddleware from './localstoragemiddleware';
 import searchReducer from './reducer';
-import { getUserRequest } from './actions';
-
 
 const requestPastSearchFromLocalStorage=()=>{
   var isThereHistory=localStorage.getItem("pastSearch");

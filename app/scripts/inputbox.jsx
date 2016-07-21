@@ -1,9 +1,6 @@
 'use strict';
 import React from 'react';
-import SearchBar from 'react-search-bar';
-import fetch from 'isomorphic-fetch';
 import ReactDOM from 'react-dom';
-
 
 class InputBox extends React.Component{
   constructor(props){

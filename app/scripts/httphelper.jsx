@@ -2,7 +2,6 @@
 
 import assignObject from 'object-assign';
 import fetch from 'isomorphic-fetch';
-import { map } from 'underscore';
 
 const apiCallHeaders = {
   'Accept': 'application/json',
