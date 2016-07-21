@@ -13,6 +13,7 @@ import { getUserRequest } from './actions';
 
 const requestPastSearchFromLocalStorage=()=>{
   var isThereHistory=localStorage.getItem("pastSearch");
+  debugger;
   if(isThereHistory===null)
     return [];
   var parsedJSON=JSON.parse(isThereHistory);

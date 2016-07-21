@@ -9,7 +9,8 @@ class InputBox extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      timerid : null
+      timerid : null,
+      htmlForSuggestion:null
     }
   }
   searchLocally(keyword){
@@ -22,6 +23,9 @@ class InputBox extends React.Component{
       return false;
     });
     return t1;
+  }
+  onClickSuggestion(){
+    console.log("clicked");
   }
   callBack(value){
     debugger;
@@ -36,17 +40,30 @@ class InputBox extends React.Component{
       timerid : t1
     });
   }
+  createHtmlForSuggestion(suggestion){
+    var that=this;
+    return suggestion.map(function(current,index,array){
+      return (
+        <div>
+          <ul onClick={that.onClickSuggestion}>
+            {current}
+          </ul>
+        </div>
+      );
+    });
+  }
   onChange(){
     var value=ReactDOM.findDOMNode(this.refs.inputbox).value;
     debugger;
     var suggestion=this.searchLocally(value);
     var suggestionAnchor=ReactDOM.findDOMNode(this.refs.suggestionbox);
     debugger;
-    var htmlForSuggestion="";
-    suggestion.forEach(function(current,index,array){
-      htmlForSuggestion+="<ul>"+current +"</ul>";
-    });
-    suggestionAnchor.innerHTML=htmlForSuggestion;
+    var htmlForSuggestion=this.createHtmlForSuggestion(suggestion);
+    this.setState({
+      htmlForSuggestion : htmlForSuggestion
+    })
+    debugger;
+
 
     if(this.state.timerid!==null){
       clearTimeout(this.state.timerid);
@@ -63,7 +80,9 @@ class InputBox extends React.Component{
     return (
       <div>
       <input className='input' ref="inputbox" type="text"  name="search" placeholder="enter user name" onChange={this.onChange.bind(this)}/>
-      <div ref="suggestionbox"></div>
+      <div ref="suggestionbox">
+      {this.state.htmlForSuggestion}
+      </div>
       </div>
     );
   }

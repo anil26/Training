@@ -2,11 +2,8 @@
 import * as searchActionConstants from './constants';
 import * as helpers from './httphelper';
 import endPoint from './endpoints';
-// FETCH_REQUEST,
-//   FETCH_RESPONSE_SUCCESS,
-//   FETCH_RESPONSE_FAILURE,
-//   CHANGE_PAGE
-const perPage=100;
+
+
 const fetchRequest=(name)=>{
   return {
     type : searchActionConstants.FETCH_REQUEST,
@@ -31,7 +28,7 @@ const fetchFailure=(error)=>{
   };
 };
 
-const  getUserRequest=(name,page=1,perPage=perPage)=>{
+const  getUserRequest=(name,page=1)=>{
   return function(dispatch){
     dispatch(fetchRequest(name));
 
