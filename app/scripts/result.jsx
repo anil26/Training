@@ -20,6 +20,7 @@ class Result extends React.Component{
                 </a>
               </li>
           </ul>
+          <hr></hr>
         </div>
       );
     });
