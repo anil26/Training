@@ -17,7 +17,6 @@ const localStorageMiddleware = state => next => action =>{
           parsedJSON.push(action.payload.name);
           localStorage.setItem("pastSearch",JSON.stringify(parsedJSON));
         }
-
       }
       break;
     default :

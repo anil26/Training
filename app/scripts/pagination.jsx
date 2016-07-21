@@ -11,11 +11,9 @@ const PaginationAdvanced = React.createClass({
   },
 
   handleSelect(eventKey) {
-    debugger;
     this.setState({
       activePage: eventKey
     });
-    // var keyword=this.props.currentSearch?this.props.currentSearch:"";
     this.props.getUsersOnPage(this.props.currentSearch,eventKey);
   },
 

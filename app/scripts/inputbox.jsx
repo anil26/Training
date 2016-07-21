@@ -16,7 +16,6 @@ class InputBox extends React.Component{
   searchLocally(keyword){
     if(keyword=="")
       return [];
-    debugger;
     var t1=this.props.pastSearch.filter(function(current,index,array){
       if(current.indexOf(keyword)!==-1)
         return true;
@@ -24,15 +23,13 @@ class InputBox extends React.Component{
     });
     return t1;
   }
-  onClickSuggestion(){
+  onClickSuggestion(current){
     console.log("clicked");
   }
   callBack(value){
-    debugger;
+
     var that=this;
     var t1=setTimeout(function(){
-      console.log("reached");
-      debugger;
       that.props.getUsers(value);
       that.state.timerid=null;
       },2000);
@@ -54,35 +51,27 @@ class InputBox extends React.Component{
   }
   onChange(){
     var value=ReactDOM.findDOMNode(this.refs.inputbox).value;
-    debugger;
     var suggestion=this.searchLocally(value);
     var suggestionAnchor=ReactDOM.findDOMNode(this.refs.suggestionbox);
-    debugger;
     var htmlForSuggestion=this.createHtmlForSuggestion(suggestion);
     this.setState({
       htmlForSuggestion : htmlForSuggestion
     })
-    debugger;
-
-
     if(this.state.timerid!==null){
       clearTimeout(this.state.timerid);
       this.callBack(value);
-      console.log("getting called");
     }
     else{
       this.callBack(value);
     }
-
-
   }
   render(){
     return (
       <div>
-      <input className='input' ref="inputbox" type="text"  name="search" placeholder="enter user name" onChange={this.onChange.bind(this)}/>
-      <div ref="suggestionbox">
-      {this.state.htmlForSuggestion}
-      </div>
+        <input className='input' ref="inputbox" type="text"  name="search" placeholder="enter user name" onChange={this.onChange.bind(this)}/>
+        <div ref="suggestionbox">
+          {this.state.htmlForSuggestion}
+        </div>
       </div>
     );
   }

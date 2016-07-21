@@ -41,7 +41,6 @@ const  getUserRequest=(name,page=1)=>{
       });
     };
     var url=endPoint+name+"&page="+page;
-    debugger;
     return helpers.get(url,"GET",successCallBack,errorCallback);
   };
 }

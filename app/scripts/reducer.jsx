@@ -1,9 +1,6 @@
 'use strict'
 import * as searchActionConstants from './constants';
-// FETCH_REQUEST,
-//   FETCH_RESPONSE_SUCCESS,
-//   FETCH_RESPONSE_FAILURE,
-//   CHANGE_PAGE
+
 var initialState={
   currentResultSet : {
     currentResult : [],
@@ -17,7 +14,6 @@ const searchReducer=(state=initialState,action)=>{
     case searchActionConstants.FETCH_REQUEST :
       var object=Object.assign({},state);
       object.currentSearch=action.payload.name;
-      debugger;
       object.currentResultSet={
         currentResult : [],
         isFetched : false,
@@ -32,17 +28,13 @@ const searchReducer=(state=initialState,action)=>{
         isFetching : false
       }
       return object;
-
     case searchActionConstants.FETCH_RESPONSE_FAILURE :
-    var object=Object.assign({},state);
-    object.currentResultSet.isFetching=false;
-    object.currentResultSet.isFetched=false;
-    return object;
+      var object=Object.assign({},state);
+      object.currentResultSet.isFetching=false;
+      object.currentResultSet.isFetched=false;
+      return object;
     default :
       return state;
-
-
-
   }
 }
 
