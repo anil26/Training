@@ -8,6 +8,8 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import localStorageMiddleware from './localstoragemiddleware';
 import searchReducer from './reducer';
+import { getUserRequest } from './actions';
+
 
 const requestPastSearchFromLocalStorage=()=>{
   var isThereHistory=localStorage.getItem("pastSearch");
@@ -33,6 +35,7 @@ const middlewares = [thunk,localStorageMiddleware];
 const middlewareEnhancer = applyMiddleware(...middlewares);
 const enhancers = compose(middlewareEnhancer,window.devToolsExtension ? window.devToolsExtension() : f => f );
 const store = createStore(searchReducer, window.__INITIAL_STATE__, enhancers);
+// store.dispatch(getUserRequest("anil"));
+// store.dispatch(getUserRequest("kamesh"));
 
-debugger;
-render(<Root/>, document.querySelector('#appContainer'));
+render(<Root store={ store } />, document.querySelector('#appContainer'));

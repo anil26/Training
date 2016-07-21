@@ -3,7 +3,6 @@
 import assignObject from 'object-assign';
 import fetch from 'isomorphic-fetch';
 import { map } from 'underscore';
-import { checkHttpStatus, parseJSON } from '/utils/helpers';
 
 const apiCallHeaders = {
   'Accept': 'application/json',

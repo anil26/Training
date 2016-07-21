@@ -5,7 +5,6 @@ import fetch from 'isomorphic-fetch';
 import ReactDOM from 'react-dom';
 
 
-var t=["anil","sunil","sudhir","rinku","priyanka","kamesh"];
 class InputBox extends React.Component{
   constructor(props){
     super(props);
@@ -16,7 +15,8 @@ class InputBox extends React.Component{
   searchLocally(keyword){
     if(keyword=="")
       return [];
-    var t1=t.filter(function(current,index,array){
+    debugger;
+    var t1=this.props.pastSearch.filter(function(current,index,array){
       if(current.indexOf(keyword)!==-1)
         return true;
       return false;
@@ -28,20 +28,26 @@ class InputBox extends React.Component{
     var that=this;
     var t1=setTimeout(function(){
       console.log("reached");
-      that.searchFromApi(value);
+      debugger;
+      that.props.getUsers(value);
       that.state.timerid=null;
       },2000);
-
     this.setState({
       timerid : t1
     });
   }
-  searchFromApi(){
-    console.log("called searchApi");
-  }
   onChange(){
     var value=ReactDOM.findDOMNode(this.refs.inputbox).value;
     debugger;
+    var suggestion=this.searchLocally(value);
+    var suggestionAnchor=ReactDOM.findDOMNode(this.refs.suggestionbox);
+    debugger;
+    var htmlForSuggestion="";
+    suggestion.forEach(function(current,index,array){
+      htmlForSuggestion+="<ul>"+current +"</ul>";
+    });
+    suggestionAnchor.innerHTML=htmlForSuggestion;
+
     if(this.state.timerid!==null){
       clearTimeout(this.state.timerid);
       this.callBack(value);
@@ -51,16 +57,6 @@ class InputBox extends React.Component{
       this.callBack(value);
     }
 
-
-    var suggestion=this.searchLocally(value);
-    var suggestionAnchor=ReactDOM.findDOMNode(this.refs.suggestionbox);
-
-    debugger;
-    var htmlForSuggestion="";
-    suggestion.forEach(function(current,index,array){
-      htmlForSuggestion+="<ul>"+current +"</ul>";
-    });
-    suggestionAnchor.innerHTML=htmlForSuggestion;
 
   }
   render(){

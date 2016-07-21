@@ -6,9 +6,13 @@ import endPoint from './endpoints';
 //   FETCH_RESPONSE_SUCCESS,
 //   FETCH_RESPONSE_FAILURE,
 //   CHANGE_PAGE
-const fetchRequest=()=>{
+const perPage=100;
+const fetchRequest=(name)=>{
   return {
     type : searchActionConstants.FETCH_REQUEST,
+    payload :{
+      name : name
+    }
   }
 }
 
@@ -27,9 +31,9 @@ const fetchFailure=(error)=>{
   };
 };
 
-const  getUserRequest=(name)=>{
+const  getUserRequest=(name,page=1,perPage=perPage)=>{
   return function(dispatch){
-    dispatch(fetchRequest());
+    dispatch(fetchRequest(name));
 
     var successCallBack=function(response){
       dispatch(fetchSuccess(response));
@@ -39,9 +43,13 @@ const  getUserRequest=(name)=>{
         dispatch(fetchFailure({ statusText: resp.message }));
       });
     };
-    var url=endPoint+"name";
+    var url=endPoint+name+"&page="+page+"&per_page="+ perPage;
+    debugger;
     return helpers.get(url,"GET",successCallBack,errorCallback);
   };
 }
 
+export {
+  getUserRequest
+}
 

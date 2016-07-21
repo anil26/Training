@@ -1,11 +1,14 @@
 'use strict'
 import React from 'react';
 import App from './App';
-import InputBox from './inputbox';
+import { Provider } from 'react-redux';
+import Test from './test';
 class Root extends React.Component{
   render(){
     return (
-     <App/>
+     <Provider store={this.props.store}>
+      <App/>
+     </Provider>
     );
   }
 }
