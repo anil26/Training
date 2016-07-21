@@ -28,14 +28,11 @@ window.__INITIAL_STATE__ = {
     isFetched : false
   },
   pastSearch:requestPastSearchFromLocalStorage(),
-  currentPage : 1
+  currentSearch:""
 };
 
 const middlewares = [thunk,localStorageMiddleware];
 const middlewareEnhancer = applyMiddleware(...middlewares);
 const enhancers = compose(middlewareEnhancer,window.devToolsExtension ? window.devToolsExtension() : f => f );
 const store = createStore(searchReducer, window.__INITIAL_STATE__, enhancers);
-// store.dispatch(getUserRequest("anil"));
-// store.dispatch(getUserRequest("kamesh"));
-
 render(<Root store={ store } />, document.querySelector('#appContainer'));

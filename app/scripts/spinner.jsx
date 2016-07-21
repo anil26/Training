@@ -5,7 +5,7 @@ class Spinner extends React.Component {
 
   render() {
     debugger;
-    if(this.props.isFetching==true){
+    if(this.props.isFetching==true && this.props.isFetched==false){
       return (
       <div className = 'row'>
         <div className = 'col-xs-12'>

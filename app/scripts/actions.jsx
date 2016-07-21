@@ -43,7 +43,7 @@ const  getUserRequest=(name,page=1,perPage=perPage)=>{
         dispatch(fetchFailure({ statusText: resp.message }));
       });
     };
-    var url=endPoint+name+"&page="+page+"&per_page="+ perPage;
+    var url=endPoint+name+"&page="+page;
     debugger;
     return helpers.get(url,"GET",successCallBack,errorCallback);
   };

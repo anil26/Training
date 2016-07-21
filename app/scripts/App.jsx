@@ -17,9 +17,9 @@ class App extends React.Component{
           <InputBox pastSearch={this.props.pastSearch} getUsers={this.props.actions.getUserRequest}/>
           </div>
           </div>
-          <Spinner isFetching={this.props.result.isFetching}/>
+          <Spinner isFetching={this.props.result.isFetching} isFetched={this.props.result.isFetched}/>
           <Result data={this.props.result.currentResult.items?this.props.result.currentResult.items : []}/>
-          <Paginat/>
+          <Paginat getUsersOnPage={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
         </div>
     );
   }
@@ -28,7 +28,7 @@ class App extends React.Component{
 const mapStateToProps = (state) => ({
   result : state.currentResultSet,
   pastSearch : state.pastSearch,
-  currentPage : state.currentPage
+  currentSearch : state.currentSearch
 });
 
 const mapDispatchToProps = (dispatch) => ({

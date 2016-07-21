@@ -13,8 +13,11 @@ const localStorageMiddleware = state => next => action =>{
       else {
         var stringified=localStorage.getItem("pastSearch");
         var parsedJSON=JSON.parse(stringified);
-        parsedJSON.push(action.payload.name);
-        localStorage.setItem("pastSearch",JSON.stringify(parsedJSON));
+        if(action.payload.name!=="" && action.payload.name!==null){
+          parsedJSON.push(action.payload.name);
+          localStorage.setItem("pastSearch",JSON.stringify(parsedJSON));
+        }
+
       }
       break;
     default :

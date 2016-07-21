@@ -16,6 +16,8 @@ const searchReducer=(state=initialState,action)=>{
   switch(action.type){
     case searchActionConstants.FETCH_REQUEST :
       var object=Object.assign({},state);
+      object.currentSearch=action.payload.name;
+      debugger;
       object.currentResultSet={
         currentResult : [],
         isFetched : false,
