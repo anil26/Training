@@ -16,12 +16,12 @@ class InputBox extends React.Component{
   searchLocally(keyword){
     if(keyword=="")
       return [];
-    var t1=this.props.pastSearch.filter(function(current,index,array){
+    var filteredSuggestion=this.props.pastSearch.filter(function(current,index,array){
       if(current.indexOf(keyword)!==-1)
         return true;
       return false;
     });
-    return t1;
+    return filteredSuggestion;
   }
   onClickSuggestion(current){
     console.log("clicked");
@@ -29,12 +29,12 @@ class InputBox extends React.Component{
   callBack(value){
 
     var that=this;
-    var t1=setTimeout(function(){
+    var timerid=setTimeout(function(){
       that.props.getUsers(value);
       that.state.timerid=null;
       },2000);
     this.setState({
-      timerid : t1
+      timerid : timerid
     });
   }
   createHtmlForSuggestion(suggestion){
