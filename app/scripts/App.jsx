@@ -30,6 +30,7 @@ class App extends React.Component{
   }
 
   render(){
+    debugger;
     return (
         <div>
           <div className='row'>
@@ -39,7 +40,7 @@ class App extends React.Component{
           </div>
           <Spinner isFetching={this.props.result.isFetching} isFetched={this.props.result.isFetched}/>
           <Result statusText={this.props.statusText} data={this.props.result.currentResult.items?this.props.result.currentResult.items : []}/>
-          <Page isFetched={this.props.result.isFetched} getUsersOnPage={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
+          <Page isFetched={this.props.result.isFetched} page={this.props.result.page} getUsersOnPage={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
         </div>
     );
   }

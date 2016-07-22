@@ -15,20 +15,19 @@ const requestPastSearchFromLocalStorage=()=>{
     return [];
   var parsedJSON=JSON.parse(isThereHistory);
   return parsedJSON;
-
 }
 
 window.__INITIAL_STATE__ = {
   currentResultSet : {
     currentResult : [],
     isFetching : false,
-    isFetched : false
+    isFetched : false,
+    page :1
   },
   pastSearch:requestPastSearchFromLocalStorage(),
   currentSearch:"",
   statusText : ""
 };
-
 const middlewares = [thunk,localStorageMiddleware];
 const middlewareEnhancer = applyMiddleware(...middlewares);
 const enhancers = compose(middlewareEnhancer,window.devToolsExtension ? window.devToolsExtension() : f => f );

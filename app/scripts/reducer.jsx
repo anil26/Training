@@ -5,7 +5,8 @@ var initialState={
   currentResultSet : {
     currentResult : [],
     isFetching : false,
-    isFetched : false
+    isFetched : false,
+    page : 1
   }
 }
 
@@ -19,7 +20,8 @@ const searchReducer=(state=initialState,action)=>{
       object.currentResultSet={
         currentResult : [],
         isFetched : false,
-        isFetching : true
+        isFetching : true,
+        page : action.payload.page
       }
       return object;
     case searchActionConstants.FETCH_RESPONSE_SUCCESS:
@@ -27,7 +29,8 @@ const searchReducer=(state=initialState,action)=>{
       object.currentResultSet={
         currentResult : action.payload.data,
         isFetched : true,
-        isFetching : false
+        isFetching : false,
+        page : action.payload.page
       }
       object.statusText='';
       return object;

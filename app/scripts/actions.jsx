@@ -4,21 +4,23 @@ import * as helpers from './httphelper';
 import endPoint from './endpoints';
 
 
-const fetchRequest=(name)=>{
+const fetchRequest=(name,page)=>{
   return {
     type : searchActionConstants.FETCH_REQUEST,
     payload :{
-      name : name
+      name : name,
+      page :page
     }
 
   }
 }
 
-const fetchSuccess=(data)=>{
+const fetchSuccess=(data,page)=>{
   return {
     type : searchActionConstants.FETCH_RESPONSE_SUCCESS,
     payload : {
       data : data,
+      page : page
     },
     statusText : ''
   };
@@ -37,10 +39,10 @@ const parseInput=(name)=>{
 const  getUserRequest=(name,page=1)=>{
   var name=parseInput(name);
     return function(dispatch){
-    dispatch(fetchRequest(name));
+    dispatch(fetchRequest(name,page));
 
     var successCallBack=function(response){
-      dispatch(fetchSuccess(response));
+      dispatch(fetchSuccess(response,page));
     }
     var errorCallback = (error) => {
       dispatch(fetchFailure(searchActionConstants.NO_USER_ON_THIS_PAGE));

@@ -22,12 +22,12 @@ class Page extends React.Component{
 
     }
   }
-  // componentWillReceiveProps(nextProps){
-  //   debugger;
-  //   this.setState({
-  //     currentPage :1
-  //   });
-  // }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      currentPage :nextProps.page
+    });
+  }
+
   forwardClickHandler(){
     this.setState({
         currentPage : this.state.currentPage+1
@@ -36,7 +36,6 @@ class Page extends React.Component{
     });
   }
   render(){
-    debugger;
     if(this.props.isFetched==false)
       return (
         <div></div>
