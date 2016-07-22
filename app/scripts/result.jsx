@@ -6,7 +6,7 @@ class Result extends React.Component{
   createHTMLForResult(list){
     return list.map(function(current,index,array){
       return (
-        <div>
+        <div key={current.id}>
           <ul>
             <li>
               <img src={current.avatar_url} alt="User Avatar" height="70" width="70"/>

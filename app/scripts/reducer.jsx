@@ -14,7 +14,8 @@ const searchReducer=(state=initialState,action)=>{
     case searchActionConstants.FETCH_REQUEST :
       var object=Object.assign({},state);
       object.currentSearch=action.payload.name;
-      object.pastSearch.push(action.payload.name);
+      if(object.pastSearch.indexOf(action.payload.name)==-1)
+        object.pastSearch.push(action.payload.name);
       object.currentResultSet={
         currentResult : [],
         isFetched : false,

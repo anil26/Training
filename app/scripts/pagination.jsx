@@ -19,20 +19,24 @@ class Page extends React.Component{
       },function(){
         this.props.getUsersOnPage(this.props.currentSearch,this.state.currentPage);
       });
-      // this.props.getUsersOnPage(this.props.currentSearch,this.state.currentPage);
+
     }
   }
+  // componentWillReceiveProps(nextProps){
+  //   debugger;
+  //   this.setState({
+  //     currentPage :1
+  //   });
+  // }
   forwardClickHandler(){
-
     this.setState({
         currentPage : this.state.currentPage+1
       },function(){
           this.props.getUsersOnPage(this.props.currentSearch,this.state.currentPage);
     });
-
-
   }
   render(){
+    debugger;
     if(this.props.isFetched==false)
       return (
         <div></div>

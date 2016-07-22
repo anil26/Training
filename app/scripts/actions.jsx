@@ -30,8 +30,13 @@ const fetchFailure=(error)=>{
   };
 };
 
+const parseInput=(name)=>{
+  return name.trim();
+}
+
 const  getUserRequest=(name,page=1)=>{
-  return function(dispatch){
+  var name=parseInput(name);
+    return function(dispatch){
     dispatch(fetchRequest(name));
 
     var successCallBack=function(response){

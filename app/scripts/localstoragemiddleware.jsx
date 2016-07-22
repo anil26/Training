@@ -11,12 +11,14 @@ const localStorageMiddleware = state => next => action =>{
 
       }
       else {
-        var stringified=localStorage.getItem("pastSearch");
-        var parsedJSON=JSON.parse(stringified);
-        if(action.payload.name!=="" && action.payload.name!==null){
-          parsedJSON.push(action.payload.name);
-          localStorage.setItem("pastSearch",JSON.stringify(parsedJSON));
-        }
+          var stringified=localStorage.getItem("pastSearch");
+          var parsedJSON=JSON.parse(stringified);
+          if(parsedJSON.indexOf(action.payload.name)==-1){
+            if(action.payload.name!=="" && action.payload.name!==null){
+              parsedJSON.push(action.payload.name);
+              localStorage.setItem("pastSearch",JSON.stringify(parsedJSON));
+            }
+          }
       }
       break;
     default :

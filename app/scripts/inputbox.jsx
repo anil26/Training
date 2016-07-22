@@ -7,7 +7,9 @@ class InputBox extends React.Component{
     super(props);
     this.state={
       timerid : null,
-      htmlForSuggestion:null
+      htmlForSuggestion:null,
+      isFetching :false,
+      isFetched : false
     }
   }
   searchLocally(keyword){
@@ -32,18 +34,28 @@ class InputBox extends React.Component{
   callBack(value){
     var that=this;
     var timerid=setTimeout(function(){
-      that.props.getUsers(value);
+      var trimValue=value.trim();
       that.state.timerid=null;
+      if(trimValue=="")
+      return;
+      that.props.getUsers(value);
+      // that.state.timerid=null;
       },2000);
     this.setState({
       timerid : timerid
     });
   }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      isFetching : nextProps.isFetching,
+      isFetched : nextProps.isFetched
+    })
+  }
   createHtmlForSuggestion(suggestion){
     var that=this;
     return suggestion.map(function(current,index,array){
       return (
-        <div>
+        <div key={index} >
           <ul onClick={that.onClickSuggestion.bind(that)}>
             {current}
           </ul>
@@ -51,7 +63,9 @@ class InputBox extends React.Component{
       );
     });
   }
+
   onChange(){
+    this.props.changeState();
     var value=ReactDOM.findDOMNode(this.refs.inputbox).value;
     var suggestion=this.searchLocally(value);
     var suggestionAnchor=ReactDOM.findDOMNode(this.refs.suggestionbox);
@@ -69,7 +83,7 @@ class InputBox extends React.Component{
       <div>
         <input className='input' ref="inputbox" type="text"  name="search" placeholder="enter user name" onChange={this.onChange.bind(this)}/>
         <div ref="suggestionbox">
-        {this.props.isFetching || !(this.props.isFetched) ? '' : this.state.htmlForSuggestion}
+        {(this.state.isFetching ||  this.state.isFetched) ? '' : this.state.htmlForSuggestion}
         </div>
       </div>
     );

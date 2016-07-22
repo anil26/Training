@@ -8,12 +8,33 @@ import { connect } from 'react-redux';
 import * as searchActionCreators from './actions';
 import Result from './result';
 class App extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state={
+      isFetching : this.props.result.isFetching,
+      isFetched : this.props.result.isFetched
+    }
+  }
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      isFetched : nextProps.result.isFetched,
+      isFetching : nextProps.result.isFetching
+    });
+  }
+  changeState(){
+    this.setState({
+      isFetching : false,
+      isFetched : false
+    });
+  }
+
   render(){
     return (
         <div>
           <div className='row'>
             <div className='col-xs-12 col-md-12 col-lg-12 '>
-            <InputBox isFetching={this.props.result.isFetching} isFetched={this.props.result.isFetched} pastSearch={this.props.pastSearch} getUsers={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
+            <InputBox  changeState={this.changeState.bind(this)} isFetching={this.state.isFetching} isFetched={this.state.isFetched} pastSearch={this.props.pastSearch} getUsers={this.props.actions.getUserRequest} currentSearch={this.props.currentSearch}/>
             </div>
           </div>
           <Spinner isFetching={this.props.result.isFetching} isFetched={this.props.result.isFetched}/>
