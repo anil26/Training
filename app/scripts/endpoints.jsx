@@ -1,3 +1,3 @@
 'use strict'
-const endPoint="https://api.github.com/search/users?q=";
+const endPoint="http://www.randomtext.me/api/";
 export default endPoint;

@@ -7,26 +7,23 @@ import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import App  from './App';
-import { t3 } from './constants';
 import TypeRacerReducer from './reducer';
-// window.__INITIAL_STATE__ = {
-//   text : [];
+import { getRandomText } from './action';
 
-//
-// };
 window.__INITIAL_STATE__={
-  randomText:t3.split(" "),
+  randomText:[],
   wordPosition : 0,
   isWrongWord : false,
   currentWord : {
     index : 0,
   },
-  statusText:''
+  statusText:'',
+  textFieldDisabled : true
 }
 
 const middlewares = [thunk];
 const middlewareEnhancer = applyMiddleware(...middlewares);
 const enhancers = compose(middlewareEnhancer,window.devToolsExtension ? window.devToolsExtension() : f => f );
 const store = createStore(TypeRacerReducer, window.__INITIAL_STATE__, enhancers);
-debugger;
+store.dispatch(getRandomText());
 render(<Root store={store}/>, document.querySelector('#appContainer'));

@@ -4,8 +4,7 @@ import assignObject from 'object-assign';
 import fetch from 'isomorphic-fetch';
 
 const apiCallHeaders = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json'
+  'Accept': 'application/json'
 };
 
 const checkHttpStatus = (response) => {
@@ -25,10 +24,9 @@ const parseJSON = (response) => {
 
 const callbackHandler = () => {};
 
-const get = (url, method,successCallback = callbackHandler, errorCallback = callbackHandler) => {
-
+const get = (url,successCallback = callbackHandler, errorCallback = callbackHandler) => {
   var options = {
-    method  : method,
+    method  : "GET",
     headers : assignObject(apiCallHeaders,{}),
   };
 

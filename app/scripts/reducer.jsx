@@ -1,13 +1,8 @@
 'use strict'
 import * as TypeRacerActionCreator from './constants';
 import { parseInput } from './helper';
- // t3,
- //  SET_RIGHT_STATE,
- //  SET_WRONG_STATE,
- //  FETCH_FAILURE,
- //  FETCH_REQUEST,
- //  FETCH_SUCCESS
-var initialState={
+
+ var initialState={
   randomText:'',
   wordPosition : 0,
   isWrongWord : false,
@@ -25,6 +20,8 @@ const TypeRacerReducer=(state=initialState,action)=>{
       object.currentWord={
         index : action.payload.index
       }
+      object.isWrongWord=false;
+      object.textFieldDisabled=false;
       return object;
       break;
     case TypeRacerActionCreator.SET_WRONG_STATE :
@@ -32,6 +29,9 @@ const TypeRacerReducer=(state=initialState,action)=>{
       object.currentWord={
         index : action.payload.index
       }
+      object.isWrongWord=true;
+      object.textFieldDisabled=false;
+      return object;
       break;
     case TypeRacerActionCreator.FETCH_REQUEST :
       var object=Object.assign({},state);
@@ -48,9 +48,9 @@ const TypeRacerReducer=(state=initialState,action)=>{
         currentWord : {
           index : 0,
         },
-        statusText:''
+        statusText:'',
+        textFieldDisabled : true
       }
-
       return object;
     case TypeRacerActionCreator.FETCH_FAILURE :
       var object=Object.assign({},state);

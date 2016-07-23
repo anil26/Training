@@ -1,12 +1,8 @@
 'use strict'
 import React from 'react';
 import * as TypeRacerActionConstants from './constants';
- // t3,
- //  SET_RIGHT_STATE,
- //  SET_WRONG_STATE,
- //  FETCH_FAILURE,
- //  FETCH_REQUEST,
- //  FETCH_SUCCESS
+import endPoint from './endpoints';
+import { get } from './httphelper';
 const setWrongState=(index)=>{
   return {
     type : TypeRacerActionConstants.SET_WRONG_STATE,
@@ -41,19 +37,29 @@ const fetchSuccess=(response)=>{
 }
 const fetchFailure=(error)=>{
   return {
-    type : TypeRacerActionConstantss.FETCH_FAILURE,
+    type : TypeRacerActionConstants.FETCH_FAILURE,
     payload : {
       error : error
     }
   }
 }
-// const getRandomText(){
-
-// }
+const getRandomText=()=>{
+  debugger;
+  return function(dispatch){
+    var successCallBack=function(response){
+      dispatch(fetchSuccess(response.text_out));
+    }
+    var errorCallback = (error) => {
+      dispatch(fetchFailure(error));
+    };
+    return get(endPoint,successCallBack,errorCallback);
+  }
+}
 
 
 
 export {
   setRightState,
-  setWrongState
+  setWrongState,
+  getRandomText
 }

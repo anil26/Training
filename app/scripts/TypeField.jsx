@@ -1,21 +1,51 @@
 'use strict'
 import React from 'react';
-import Spinner from './spinner';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { t3 } from './constants';
-
+import ReactDOM from 'react-dom';
+import * as helpers from './helper';
 
 
 class TypeField extends React.Component{
-  onChange(event){
-   debugger;
-   console.log("typed");
+  onKeyUp(event){
+    var textArray=this.props.randomText;
+    var currentIndex= this.props.currentWord.index;
+    var isWrongWord=this.props.isWrongWord;
+    var typedText=ReactDOM.findDOMNode(this.refs.typebox);
+    if(typedText.value==""){
+      this.props.setRightState(currentIndex);
+      return;
+    }
+    if(String.fromCharCode(event.which)==" " && typedText.value.length==textArray[currentIndex].length+1){
+      if(helpers.checkToRemove(textArray[currentIndex],typedText.value)){
+        typedText.value="";
+        this.props.setRightState(currentIndex+1);
+      }
+      else {
+        this.props.setWrongState(currentIndex);
+      }
+    }
+    else{
+      if(!helpers.checkValidity(textArray[currentIndex],typedText.value)){
+        this.props.setWrongState(currentIndex);
+      }
+      else {
+        this.props.setRightState(currentIndex);
+      }
+    }
   }
+
   render(){
+    var classForTypeField;
+    if(this.props.isWrongWord){
+      classForTypeField="txtInput wrongTypeField";
+    }
+    else{
+      classForTypeField='txtInput';
+    }
     return (
         <div>
-          <input ref="typebox" onChange={this.onChange.bind(this)} type="text" className="txtInput" autocorrect="off" autocapitalize="off"/>
+          <input disabled={this.props.disabled} placeholder="Type the above text here"className={classForTypeField} ref="typebox" type="text"  autocorrect="off" autocapitalize="off" onKeyUp={this.onKeyUp.bind(this)}/>
         </div>
     );
   }

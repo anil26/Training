@@ -1,29 +1,31 @@
 'use strict'
 import React from 'react';
-import Spinner from './spinner';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { t3 } from './constants';
+
 class Board extends React.Component{
   createBoardHtml(){
+    var that=this;
     return this.props.randomText.map(function(current,index,array){
-      if(this.props.currentWord.index==index){
-        if(this.props.isWrongWord==true){
-          return (<span className={wrongText}>current</span>);
+      if(that.props.currentWord.index==index){
+        if(that.props.isWrongWord==true){
+          return (<span key={index}><span className="wrongText">{current}</span><span> </span></span>);
         }
-        if(this.props.isWrongWord==false){
-          return (<span className={correctText}>current</span>);
+        if(that.props.isWrongWord==false){
+          return (<span key={index}><span className="correctText">{current}</span><span> </span></span>);
         }
       }
-      return (<span>current</span>);
+      return (<span key={index}><span>{current}</span><span> </span></span>);
 
     });
   }
-
   render(){
+    var createBoardHtml=this.createBoardHtml.bind(this)
     return (
         <div className="board">
-          {t3}
+          <p>
+          {createBoardHtml()}
+          </p>
         </div>
     );
   }
