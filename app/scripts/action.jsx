@@ -44,8 +44,8 @@ const fetchFailure=(error)=>{
   }
 }
 const getRandomText=()=>{
-  debugger;
   return function(dispatch){
+    dispatch(fetchRequest());
     var successCallBack=function(response){
       dispatch(fetchSuccess(response.text_out));
     }
