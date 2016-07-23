@@ -4,14 +4,12 @@ import { parseInput } from './helper';
 
  var initialState={
   randomText:'',
-  wordPosition : 0,
   isWrongWord : false,
   currentWord : {
     index : 0,
   },
   statusText:''
 }
-
 
 const TypeRacerReducer=(state=initialState,action)=>{
   switch(action.type){
@@ -43,7 +41,6 @@ const TypeRacerReducer=(state=initialState,action)=>{
       var textArray=text.split(" ");
       var object={
         randomText:textArray,
-        wordPosition : 0,
         isWrongWord : false,
         currentWord : {
           index : 0,

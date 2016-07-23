@@ -12,7 +12,6 @@ import { getRandomText } from './action';
 
 window.__INITIAL_STATE__={
   randomText:[],
-  wordPosition : 0,
   isWrongWord : false,
   currentWord : {
     index : 0,
