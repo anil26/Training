@@ -54,7 +54,7 @@ class App extends React.Component{
       that.setState({
             seconds : seconds,
             minutes : minutes
-          })
+      });
       time++;
       if(time/60==timelimit && that.props.currentWord.index!==that.props.randomText.length){
         that.props.actions.getRandomText();
@@ -81,9 +81,6 @@ class App extends React.Component{
 
     },1000);
   }
-  // componentDidMount(){
-  //   debugger;
-  // }
   render(){
     debugger;
     return (

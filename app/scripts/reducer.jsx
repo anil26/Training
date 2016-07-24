@@ -59,5 +59,4 @@ const TypeRacerReducer=(state=initialState,action)=>{
   }
 }
 
-
 export default TypeRacerReducer;

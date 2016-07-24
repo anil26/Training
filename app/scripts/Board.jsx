@@ -16,7 +16,6 @@ class Board extends React.Component{
         }
       }
       return (<span key={index}><span>{current}</span><span> </span></span>);
-
     });
   }
   render(){

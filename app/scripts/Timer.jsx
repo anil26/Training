@@ -7,10 +7,4 @@ class Timer extends React.Component{
     );
   }
 }
-
 export default Timer;
-// render(){
-//     return (
-//       <div>{this.props.minutes}:{this.props.seconds}</div>
-//     );
-//   }

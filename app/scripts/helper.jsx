@@ -9,8 +9,7 @@ const parseInput=(text)=>{
     else{
       t4+=current;
     }
-
-  })
+  });
   var t3=t4.trim();
   return t3;
 }
@@ -24,7 +23,6 @@ const checkToRemove=(originalWord,typedtext)=>{
 }
 
 const checkValidity=(originalWord,typedtext)=>{
-  debugger;
   var length=typedtext.length;
   var originalWord=originalWord.replace(/[\n\r]+/g, '');
   var subString=originalWord.substr(0,length);
