@@ -12,11 +12,13 @@ class TypeField extends React.Component{
     var currentIndex= this.props.currentWord.index;
     var isWrongWord=this.props.isWrongWord;
     var typedText=ReactDOM.findDOMNode(this.refs.typebox);
+    debugger;
     if(typedText.value==""){
       this.props.setRightState(currentIndex);
       return;
     }
-    if(String.fromCharCode(event.which)==" " && typedText.value.length==textArray[currentIndex].length+1){
+    var currentText=textArray[currentIndex].replace(/[\n\r]+/g,'');
+    if(String.fromCharCode(event.which)==" " && typedText.value.length==currentText.length+1){
       if(helpers.checkToRemove(textArray[currentIndex],typedText.value)){
         typedText.value="";
         this.props.setRightState(currentIndex+1);
@@ -34,7 +36,6 @@ class TypeField extends React.Component{
       }
     }
   }
-
   render(){
     var classForTypeField;
     if(this.props.isWrongWord){

@@ -1,8 +1,17 @@
 'use strict';
 const parseInput=(text)=>{
   var t1= text.split(/<\/?p>/);
-  var t2=t1.join("");
-  var t3=t2.trim();
+  var t4="";
+  t1.forEach(function(current,index,array){
+    if(current[current.length-1]=='.'){
+      t4+=current+ " ";
+    }
+    else{
+      t4+=current;
+    }
+
+  })
+  var t3=t4.trim();
   return t3;
 }
 const checkToRemove=(originalWord,typedtext)=>{
@@ -15,7 +24,10 @@ const checkToRemove=(originalWord,typedtext)=>{
 }
 
 const checkValidity=(originalWord,typedtext)=>{
-  var subString=originalWord.substr(0,typedtext.length);
+  debugger;
+  var length=typedtext.length;
+  var originalWord=originalWord.replace(/[\n\r]+/g, '');
+  var subString=originalWord.substr(0,length);
   return (subString==typedtext);
 }
 
