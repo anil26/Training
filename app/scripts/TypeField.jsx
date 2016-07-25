@@ -6,21 +6,20 @@ import ReactDOM from 'react-dom';
 import * as helpers from './helper';
 
 
-class TypeField extends React.Component{
-  onKeyUp(event){
-    var textArray=this.props.randomText;
-    var currentIndex= this.props.currentWord.index;
-    var isWrongWord=this.props.isWrongWord;
-    var typedText=ReactDOM.findDOMNode(this.refs.typebox);
-    debugger;
-    if(typedText.value==""){
+class TypeField extends React.Component {
+  onKeyUp(event) {
+    var textArray = this.props.randomText;
+    var currentIndex = this.props.currentWord.index;
+    var isWrongWord = this.props.isWrongWord;
+    var typedText = ReactDOM.findDOMNode(this.refs.typebox);
+    if(typedText.value == ""){
       this.props.setRightState(currentIndex);
       return;
     }
-    var currentText=textArray[currentIndex].replace(/[\n\r]+/g,'');
-    if(String.fromCharCode(event.which)==" " && typedText.value.length==currentText.length+1){
+    var currentText = textArray[currentIndex].replace(/[\n\r]+/g,'');
+    if(String.fromCharCode(event.which) == " " && typedText.value.length == currentText.length+1){
       if(helpers.checkToRemove(textArray[currentIndex],typedText.value)){
-        typedText.value="";
+        typedText.value = "";
         this.props.setRightState(currentIndex+1);
       }
       else {
@@ -39,10 +38,10 @@ class TypeField extends React.Component{
   render(){
     var classForTypeField;
     if(this.props.isWrongWord){
-      classForTypeField="txtInput wrongTypeField";
+      classForTypeField = "txtInput wrongTypeField";
     }
     else{
-      classForTypeField='txtInput';
+      classForTypeField = 'txtInput';
     }
     return (
         <div>

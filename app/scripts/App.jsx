@@ -8,70 +8,70 @@ import * as TypeRacerActionCreators from './action';
 import { Button } from 'react-bootstrap';
 import Timer from './Timer';
 import ReactDOM from 'react-dom';
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       disabled : this.props.textFieldDisabled,
       minutes : '',
       seconds :''
     }
   }
-  componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps) {
     this.setState({
       disabled : nextProps.textFieldDisabled
     });
   }
-  onClick(){
+  onClick() {
     this.setState({
       disabled : false
     });
-    var timelimit=3;
-    var time=0;
-    var buttonElement=ReactDOM.findDOMNode(this.refs.startbutton);
+    var timelimit = 3;
+    var time = 0;
+    var buttonElement = ReactDOM.findDOMNode(this.refs.startbutton);
 
-    buttonElement.disabled=true;
+    buttonElement.disabled = true;
     var minutes,seconds;
-    var timerTime=timelimit;
-    minutes=timerTime;
-    seconds=0;
-    var that=this;
-    var timerid=setInterval(function(){
+    var timerTime = timelimit;
+    minutes = timerTime;
+    seconds = 0;
+    var that = this;
+    var timerid = setInterval(function() {
       seconds=parseInt(seconds);
-      if(seconds!==0){
-        seconds=parseInt(seconds);
-        seconds=seconds-1;
+      if(seconds !== 0){
+        seconds = parseInt(seconds);
+        seconds = seconds-1;
 
-        if(seconds<10 && seconds!==-1){
+        if(seconds < 10 && seconds !== -1){
           seconds=seconds.toString();
           seconds="0" + seconds;
         }
       }
       else{
-        seconds=59;
-        minutes=minutes-1;
+        seconds = 59;
+        minutes = minutes - 1;
       }
       that.setState({
             seconds : seconds,
             minutes : minutes
       });
       time++;
-      if(time/60==timelimit && that.props.currentWord.index!==that.props.randomText.length){
+      if(time/60 == timelimit && that.props.currentWord.index !== that.props.randomText.length){
         that.props.actions.getRandomText();
         clearInterval(timerid);
-        buttonElement.disabled=false;
+        buttonElement.disabled = false;
         alert("You lost");
         that.setState({
         minutes : '',
         seconds : ''
       })
 
-      }else if(time/60<timelimit && that.props.currentWord.index==that.props.randomText.length){
-        var speed=that.props.randomText.length/(time/60);
+      }else if(time/60 < timelimit && that.props.currentWord.index == that.props.randomText.length){
+        var speed = that.props.randomText.length/(time/60);
         alert("You won!!" + " Wow Your typing speed was " + speed + "words/minute");
         clearInterval(timerid);
         that.props.actions.getRandomText();
-        buttonElement.disabled=false;
+        buttonElement.disabled = false;
         that.setState({
         minutes : '',
         seconds : ''
@@ -81,7 +81,7 @@ class App extends React.Component{
 
     },1000);
   }
-  render(){
+  render() {
     debugger;
     return (
         <div>

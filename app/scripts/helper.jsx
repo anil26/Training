@@ -13,19 +13,19 @@ const parseInput=(text)=>{
   var t3=t4.trim();
   return t3;
 }
-const checkToRemove=(originalWord,typedtext)=>{
-  if(typedtext[typedtext.length-1]==" "){
-    var t=typedtext.split("");
+const checkToRemove = (originalWord,typedtext) => {
+  if(typedtext[typedtext.length-1] == " "){
+    var t = typedtext.split("");
     t.pop();
-    var t1=t.join("");
+    var t1 = t.join("");
     return checkValidity(originalWord,t1);
   }
 }
 
-const checkValidity=(originalWord,typedtext)=>{
-  var length=typedtext.length;
-  var originalWord=originalWord.replace(/[\n\r]+/g, '');
-  var subString=originalWord.substr(0,length);
+const checkValidity = (originalWord,typedtext) => {
+  var length = typedtext.length;
+  var originalWord = originalWord.replace(/[\n\r]+/g, '');
+  var subString = originalWord.substr(0,length);
   return (subString==typedtext);
 }
 

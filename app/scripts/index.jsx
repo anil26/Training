@@ -10,8 +10,7 @@ import App  from './App';
 import TypeRacerReducer from './reducer';
 import { getRandomText } from './action';
 
-
-window.__INITIAL_STATE__={
+window.__INITIAL_STATE__ = {
   randomText:[],
   isWrongWord : false,
   currentWord : {

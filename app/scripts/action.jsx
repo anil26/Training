@@ -3,7 +3,7 @@ import React from 'react';
 import * as TypeRacerActionConstants from './constants';
 import endPoint from './endpoints';
 import { get } from './httphelper';
-const setWrongState=(index)=>{
+const setWrongState = (index) => {
   return {
     type : TypeRacerActionConstants.SET_WRONG_STATE,
     payload : {
@@ -12,7 +12,7 @@ const setWrongState=(index)=>{
   }
 }
 
-const setRightState=(index)=>{
+const setRightState = (index) => {
   return {
     type : TypeRacerActionConstants.SET_RIGHT_STATE,
     payload : {
@@ -21,13 +21,13 @@ const setRightState=(index)=>{
   }
 }
 
-const fetchRequest=()=>{
+const fetchRequest = () => {
   return {
     type : TypeRacerActionConstants.FETCH_REQUEST
   }
 }
 
-const fetchSuccess=(response)=>{
+const fetchSuccess = (response) => {
   return {
     type : TypeRacerActionConstants.FETCH_SUCCESS,
     payload : {
@@ -35,7 +35,7 @@ const fetchSuccess=(response)=>{
     }
   }
 }
-const fetchFailure=(error)=>{
+const fetchFailure = (error) => {
   return {
     type : TypeRacerActionConstants.FETCH_FAILURE,
     payload : {
@@ -43,7 +43,7 @@ const fetchFailure=(error)=>{
     }
   }
 }
-const getRandomText=()=>{
+const getRandomText = () => {
   return function(dispatch){
     dispatch(fetchRequest());
     var successCallBack=function(response){

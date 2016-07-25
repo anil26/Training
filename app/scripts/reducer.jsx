@@ -2,7 +2,7 @@
 import * as TypeRacerActionCreator from './constants';
 import { parseInput } from './helper';
 
- var initialState={
+ var initialState = {
   randomText:'',
   isWrongWord : false,
   currentWord : {
@@ -11,7 +11,7 @@ import { parseInput } from './helper';
   statusText:''
 }
 
-const TypeRacerReducer=(state=initialState,action)=>{
+const TypeRacerReducer = (state=initialState,action) => {
   switch(action.type){
     case TypeRacerActionCreator.SET_RIGHT_STATE :
       var object=Object.assign({},state);
